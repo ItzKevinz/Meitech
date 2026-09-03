@@ -262,3 +262,7 @@
 .sidebar.collapsed .sidebar-children {
   display: none;
 }
+
+.sidebar-item.active span {
+  font-weight: 800;
+}

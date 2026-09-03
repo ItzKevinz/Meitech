@@ -11,17 +11,28 @@ import ConsultationForm from "./Beranda/ConsultationForm";
 import ContactTeamForm from "./Beranda/ContactTeamForm";
 import PartnerForm from "./Beranda/PartnerForm";
 import "./styles/global.css";
+import AboutProfile from "./pages/AboutProfile";
+import AboutVisiMisi from "./pages/AboutVisiMisi";
+import Certificate from "./pages/Certificate";
+import CertificateDetail from "./pages/CertificateDetail";
+import CertificateEdit from "./pages/CertificateEdit";
+import CertificateAdd from "./pages/CertificateAdd";
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [currentPage, setCurrentPage] = useState("dashboard");
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
 
   const toggleSidebar = () => {
     setSidebarCollapsed((prev) => !prev);
   };
 
-  const handleNavigate = (page) => {
+  const handleNavigate = (page, data = null) => {
     setCurrentPage(page);
+
+    if (data) {
+      setSelectedCertificate(data);
+    }
   };
 
   const renderPage = () => {
@@ -53,6 +64,46 @@ function App() {
       case "mitra":
         return <PartnerForm />;
 
+      case "about-profile":
+        return <AboutProfile />;
+
+      case "about-visi-misi":
+        return <AboutVisiMisi />;
+
+      case "sertifikat":
+        return <Certificate onNavigate={handleNavigate} />;
+
+      case "certificate-detail":
+        return (
+          <CertificateDetail
+            certificate={selectedCertificate}
+            onBack={() => handleNavigate("sertifikat")}
+          />
+        );
+
+      case "certificate-edit":
+        return (
+          <CertificateEdit
+            certificate={selectedCertificate}
+            onBack={() => handleNavigate("sertifikat")}
+            onSave={(updatedCertificate) => {
+              setSelectedCertificate(updatedCertificate);
+              handleNavigate("sertifikat");
+            }}
+          />
+        );
+
+        case "certificate-add":
+  return (
+    <CertificateAdd
+      onBack={() => handleNavigate("sertifikat")}
+      onSave={(newCertificate) => {
+        console.log("Data baru:", newCertificate);
+        handleNavigate("sertifikat");
+      }}
+    />
+  );
+  
       case "dashboard":
       default:
         return <Dashboard />;
@@ -60,21 +111,11 @@ function App() {
   };
 
   return (
-    <div
-      className={`app ${
-        sidebarCollapsed ? "sidebar-collapsed" : ""
-      }`}
-    >
-      <Sidebar
-        collapsed={sidebarCollapsed}
-        onNavigate={handleNavigate}
-      />
+    <div className={`app ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
+      <Sidebar collapsed={sidebarCollapsed} onNavigate={handleNavigate} />
 
       <main className="main-content">
-        <Navbar
-          onMenuClick={toggleSidebar}
-          onNavigate={handleNavigate}
-        />
+        <Navbar onMenuClick={toggleSidebar} onNavigate={handleNavigate} />
 
         {renderPage()}
       </main>

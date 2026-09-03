@@ -19,7 +19,9 @@ export const navigation = {
       icon: Settings,
       dropdown: true,
       children: [
-        // Sub-menu Beranda dibuat dropdown dengan anak menu
+        // =========================
+        // BERANDA
+        // =========================
         {
           label: "Beranda",
           dropdown: true,
@@ -30,13 +32,36 @@ export const navigation = {
             { label: "Beranda-Mitra" },
           ],
         },
-        { label: "Tentang Kami" },
+
+        // =========================
+        // TENTANG KAMI
+        // =========================
+        {
+          label: "Tentang Kami",
+          dropdown: true,
+          children: [
+            {
+              label: "Tentang-Profil",
+            },
+            {
+              label: "Tentang-Visi Misi",
+            },
+          ],
+        },
+
+        // =========================
+        // MENU LAIN
+        // =========================
         { label: "Sertifikat" },
         { label: "Artikel" },
         { label: "Projek" },
         { label: "FAQ" },
         { label: "Karir" },
         { label: "Lokasi" },
+
+        // =========================
+        // TOP GENERAL
+        // =========================
         {
           label: "Top General",
           dropdown: true,
@@ -53,6 +78,9 @@ export const navigation = {
       ],
     },
 
+    // =========================
+    // PRODUK
+    // =========================
     {
       label: "Produk",
       icon: Package,
@@ -60,18 +88,27 @@ export const navigation = {
       children: [],
     },
 
+    // =========================
+    // FOOTER
+    // =========================
     {
       label: "Footer",
       icon: Grid3X3,
       dropdown: false,
     },
 
+    // =========================
+    // PENGATURAN PENGGUNA
+    // =========================
     {
       label: "Pengaturan Pengguna",
       icon: UsersRound,
       dropdown: false,
     },
 
+    // =========================
+    // KONTAK
+    // =========================
     {
       label: "Kontak",
       icon: Mail,

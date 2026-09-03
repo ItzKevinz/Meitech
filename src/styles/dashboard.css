@@ -364,3 +364,11 @@ thead {
     padding: 12px;
   }
 }
+
+.dashboard-menu.active span {
+  font-weight: 800;
+}
+
+.sidebar-item.active span {
+  font-weight: 800;
+}

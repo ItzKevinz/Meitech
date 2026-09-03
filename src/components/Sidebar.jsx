@@ -1,68 +1,101 @@
 import { useState } from "react";
+
 import { ChevronDown } from "lucide-react";
-import { navigation } from "../data/navigation";
+
+import { navigation } from "../data/Navigation";
+
 import "../styles/sidebar.css";
+
 import logoMeitech from "../assets/logo-meitech.png";
 
-function SidebarItem({ item, level = 0, onNavigate }) {
+function SidebarItem({
+  item,
+  level = 0,
+  onNavigate,
+  activeMenu,
+  setActiveMenu,
+}) {
   const [open, setOpen] = useState(false);
-  const Icon = item.icon;
-  
-  // Cek apakah menu memiliki turunan dropdown
-  const hasChildren = Boolean(item.dropdown && item.children && item.children.length > 0);
 
-  const handleClick = (e) => {
-    e.stopPropagation();
-    if (item.dropdown) {
-      setOpen((prev) => !prev);
-    } else if (onNavigate) {
-      const route = item.label.toLowerCase().replace(/\s+/g, "-");
-      onNavigate(route);
-    }
-  };
+  const Icon = item.icon;
+
+  const hasChildren =
+    item.dropdown &&
+    item.children &&
+    item.children.length > 0;
+
+const handleClick = () => {
+  if (item.dropdown) {
+    setOpen((prev) => !prev);
+    return;
+  }
+
+  setActiveMenu(item.label);
+
+  if (onNavigate) {
+    const routes = {
+      "Tentang-Profil": "about-profile",
+      "Tentang-Visi Misi": "about-visi-misi",
+      "Beranda-Produk": "beranda-produk",
+      "Beranda-Konsultasi": "beranda-konsultasi",
+      "Beranda-Hubungi Tim": "beranda-hubungi-tim",
+      "Beranda-Mitra": "beranda-mitra",
+    };
+
+    const page =
+      routes[item.label] ||
+      item.label.toLowerCase().replace(/\s+/g, "-");
+
+    onNavigate(page);
+  }
+};
 
   return (
     <div className="sidebar-item-wrapper">
       <button
-        className={`sidebar-item ${
-          level === 0 ? "sidebar-item-main" : "sidebar-item-child"
-        }`}
+className={`sidebar-item ${
+  level === 0 ? "sidebar-item-main" : "sidebar-item-child"
+} ${activeMenu === item.label ? "active" : ""}`}
         style={{
-          paddingLeft: `${level === 0 ? 12 : 24 + level * 8}px`,
+          paddingLeft: `${
+            level === 0 ? 4 : 28 + level * 12
+          }px`,
         }}
         onClick={handleClick}
         type="button"
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          {Icon && <Icon size={15} strokeWidth={1.8} />}
-          <span>{item.label}</span>
-        </div>
+        {Icon && (
+          <Icon
+            size={15}
+            strokeWidth={1.8}
+          />
+        )}
 
-        {/* Tampilkan ikon panah jika memiliki sub-menu */}
+        <span>{item.label}</span>
+
         {item.dropdown && (
           <ChevronDown
-            className={`sidebar-chevron ${open ? "sidebar-chevron-open" : ""}`}
+            className={`sidebar-chevron ${
+              open ? "sidebar-chevron-open" : ""
+            }`}
             size={14}
             strokeWidth={1.7}
-            style={{
-              transform: open ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.2s ease"
-            }}
           />
         )}
       </button>
 
-      {/* Render anak menu rekursif jika status open true */}
       {hasChildren && open && (
         <div className="sidebar-children">
-          {item.children.map((child) => (
-            <SidebarItem
-              key={child.label}
-              item={child}
-              level={level + 1}
-              onNavigate={onNavigate}
-            />
-          ))}
+{item.children.map((child) => (
+  <SidebarItem
+    key={child.label}
+    item={child}
+    level={level + 1}
+    onNavigate={onNavigate}
+    activeMenu={activeMenu}
+    setActiveMenu={setActiveMenu}
+  />
+))}
         </div>
       )}
     </div>
@@ -70,34 +103,58 @@ function SidebarItem({ item, level = 0, onNavigate }) {
 }
 
 export default function Sidebar({ collapsed, onNavigate }) {
-  const [activeMenu, setActiveMenu] = useState("Dashboard");
-  const DashboardIcon = navigation.dashboard.icon;
+  const [activeMenu, setActiveMenu] =
+    useState("Dashboard");
+
+  const DashboardIcon =
+    navigation.dashboard.icon;
 
   return (
-    <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+    <aside
+      className={`sidebar ${
+        collapsed ? "collapsed" : ""
+      }`}
+    >
       {/* LOGO */}
       <div className="sidebar-logo">
-        <img src={logoMeitech} alt="Meitech" className="meitech-logo" />
+        <img
+          src={logoMeitech}
+          alt="Meitech"
+          className="meitech-logo"
+        />
       </div>
 
       <div className="sidebar-divider"></div>
 
       {/* DASHBOARD */}
       <section className="sidebar-section">
-        <h3 className="sidebar-title">DASHBOARD</h3>
+        <h3 className="sidebar-title">
+          DASHBOARD
+        </h3>
 
         <button
           className={`dashboard-menu ${
-            activeMenu === "Dashboard" ? "active" : ""
+            activeMenu === "Dashboard"
+              ? "active"
+              : ""
           }`}
           onClick={() => {
             setActiveMenu("Dashboard");
-            onNavigate("dashboard");
+
+            if (onNavigate) {
+              onNavigate("dashboard");
+            }
           }}
           type="button"
         >
-          <DashboardIcon size={15} strokeWidth={1.8} />
-          <span>{navigation.dashboard.title}</span>
+          <DashboardIcon
+            size={15}
+            strokeWidth={1.8}
+          />
+
+          <span>
+            {navigation.dashboard.title}
+          </span>
         </button>
       </section>
 
@@ -105,15 +162,19 @@ export default function Sidebar({ collapsed, onNavigate }) {
 
       {/* SETTINGS */}
       <section className="sidebar-section">
-        <h3 className="sidebar-title">SETTINGS</h3>
+        <h3 className="sidebar-title">
+          SETTINGS
+        </h3>
 
         <div className="sidebar-navigation">
           {navigation.settings.map((item) => (
-            <SidebarItem
-              key={item.label}
-              item={item}
-              onNavigate={onNavigate}
-            />
+<SidebarItem
+  key={item.label}
+  item={item}
+  onNavigate={onNavigate}
+  activeMenu={activeMenu}
+  setActiveMenu={setActiveMenu}
+/>
           ))}
         </div>
       </section>
