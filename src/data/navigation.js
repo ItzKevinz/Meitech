@@ -65,7 +65,14 @@ export const navigation = {
           ],
         },
 
-        { label: "FAQ" },
+        {
+  label: "FAQ",
+  dropdown: true,
+  children: [
+    { label: "FAQ Kategori" },
+    { label: "FAQ Detail" },
+  ],
+},
         { label: "Karir" },
         { label: "Lokasi" },
 

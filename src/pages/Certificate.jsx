@@ -278,33 +278,36 @@ const handleAdd = () => {
 
                   <td className="border border-[#D9D9D9] px-3 py-5 !text-center align-middle">
                     <div className="flex items-center justify-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleDetail(certificate)}
-                        className="flex items-center gap-1 rounded bg-[#2196F3] px-3 py-1.5 text-[9px] font-bold text-white"
-                      >
-                        <Eye size={10} />
-                        Detail
-                      </button>
+  {/* DETAIL */}
+  <button
+    type="button"
+    onClick={() => handleDetail(certificate)}
+    className="flex items-center gap-1 rounded-md bg-[#138AD9] px-4 py-2 text-[11px] font-bold text-black shadow-sm transition hover:brightness-95"
+  >
+    <Eye size={11} />
+    Detail
+  </button>
 
-                      <button
-                        type="button"
-                        onClick={() => handleEdit(certificate)}
-                        className="flex items-center gap-1 rounded bg-[#FDCB01] px-3 py-1.5 text-[9px] font-bold text-black"
-                      >
-                        <Pencil size={10} />
-                        Edit
-                      </button>
+  {/* EDIT */}
+  <button
+    type="button"
+    onClick={() => handleEdit(certificate)}
+    className="flex items-center gap-1 rounded-md bg-[#FFC107] px-4 py-2 text-[11px] font-bold text-black shadow-sm transition hover:brightness-95"
+  >
+    <Pencil size={11} />
+    Edit
+  </button>
 
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(certificate.id)}
-                        className="flex items-center gap-1 rounded bg-[#EF3340] px-3 py-1.5 text-[9px] font-bold text-white"
-                      >
-                        <Trash2 size={10} />
-                        Delete
-                      </button>
-                    </div>
+  {/* DELETE */}
+  <button
+    type="button"
+    onClick={() => handleDelete(certificate.id)}
+    className="flex items-center gap-1 rounded-md bg-[#DC3545] px-4 py-2 text-[11px] font-bold text-black shadow-sm transition hover:brightness-95"
+  >
+    <Trash2 size={11} />
+    Delete
+  </button>
+</div>
                   </td>
                 </tr>
               ))}

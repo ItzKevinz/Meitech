@@ -20,34 +20,69 @@ import Certificate from "./pages/Certificate";
 import CertificateDetail from "./pages/CertificateDetail";
 import CertificateEdit from "./pages/CertificateEdit";
 import CertificateAdd from "./pages/CertificateAdd";
+import FAQCategory from "./pages/FAQCategory";
+import FAQDetail from "./pages/FAQDetail";
+import Location from "./pages/Location";
+import Career from "./pages/Career";
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [selectedCertificate, setSelectedCertificate] = useState(null);
-  
+
   // State untuk menyimpan data projek yang sedang diedit (atau null jika tambah baru)
   const [selectedProject, setSelectedProject] = useState(null);
+
+  const [faqCategories, setFaqCategories] = useState([
+  {
+    id: 1,
+    name: "Panel Maker",
+    totalFAQ: 2,
+  },
+  {
+    id: 2,
+    name: "Sheet Metal",
+    totalFAQ: 3,
+  },
+  {
+    id: 3,
+    name: "Distribution Suntree",
+    totalFAQ: 2,
+  },
+  {
+    id: 4,
+    name: "Support PV",
+    totalFAQ: 2,
+  },
+]);
 
   const toggleSidebar = () => {
     setSidebarCollapsed((prev) => !prev);
   };
 
   const handleNavigate = (page, data = null) => {
-    setCurrentPage(page);
+  setCurrentPage(page);
 
-    if (data) {
-      if (page.includes("certificate")) {
-        setSelectedCertificate(data);
-      } else if (page === "project-detail") {
-        setSelectedProject(data);
-      }
-    } else {
-      if (page === "project-detail") {
-        setSelectedProject(null);
-      }
+  if (data) {
+    if (page.includes("certificate")) {
+      setSelectedCertificate(data);
+    } else if (page === "project-detail") {
+      setSelectedProject(data);
     }
-  };
+  } else {
+    if (page === "project-detail") {
+      setSelectedProject(null);
+    }
+
+    if (
+      page === "sertifikat" ||
+      page === "certificate" ||
+      page === "certificate-add"
+    ) {
+      setSelectedCertificate(null);
+    }
+  }
+};
 
   const renderPage = () => {
     switch (currentPage) {
@@ -106,39 +141,68 @@ function App() {
       case "about-visi-misi":
         return <AboutVisiMisi />;
 
-      case "sertifikat":
-        return <Certificate onNavigate={handleNavigate} />;
+// ==========================================
+// ROUTE HALAMAN SERTIFIKAT
+// ==========================================
+case "sertifikat":
+case "certificate":
+  return (
+    <Certificate
+      onNavigate={handleNavigate}
+    />
+  );
 
-      case "certificate-detail":
-        return (
-          <CertificateDetail
-            certificate={selectedCertificate}
-            onBack={() => handleNavigate("sertifikat")}
-          />
-        );
+case "certificate-detail":
+  return (
+    <CertificateDetail
+      certificate={selectedCertificate}
+      onBack={() => handleNavigate("sertifikat")}
+      onNavigate={handleNavigate}
+    />
+  );
 
-      case "certificate-edit":
-        return (
-          <CertificateEdit
-            certificate={selectedCertificate}
-            onBack={() => handleNavigate("sertifikat")}
-            onSave={(updatedCertificate) => {
-              setSelectedCertificate(updatedCertificate);
-              handleNavigate("sertifikat");
-            }}
-          />
-        );
+case "certificate-edit":
+  return (
+    <CertificateEdit
+      certificate={selectedCertificate}
+      onBack={() => handleNavigate("sertifikat")}
+      onNavigate={handleNavigate}
+    />
+  );
 
-      case "certificate-add":
-        return (
-          <CertificateAdd
-            onBack={() => handleNavigate("sertifikat")}
-            onSave={(newCertificate) => {
-              console.log("Data baru:", newCertificate);
-              handleNavigate("sertifikat");
-            }}
-          />
-        );
+case "certificate-add":
+  return (
+    <CertificateAdd
+      onBack={() => handleNavigate("sertifikat")}
+      onNavigate={handleNavigate}
+    />
+  );
+
+case "faq-kategori":
+  return (
+    <FAQCategory
+      categories={faqCategories}
+      setCategories={setFaqCategories}
+      onNavigate={handleNavigate}
+    />
+  );
+
+case "faq-detail":
+  return (
+    <FAQDetail
+      categories={faqCategories}
+      setCategories={setFaqCategories}
+      onNavigate={handleNavigate}
+    />
+  );
+
+  case "lokasi":
+case "location":
+  return <Location />;
+
+  case "karir":
+case "career":
+  return <Career />;
 
       case "dashboard":
       default:
