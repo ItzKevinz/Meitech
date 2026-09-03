@@ -1,11 +1,7 @@
 import { useState } from "react";
-
 import { ChevronDown } from "lucide-react";
-
-import { navigation } from "../data/Navigation";
-
+import { navigation } from "../data/navigation";
 import "../styles/sidebar.css";
-
 import logoMeitech from "../assets/logo-meitech.png";
 
 function SidebarItem({
@@ -16,46 +12,46 @@ function SidebarItem({
   setActiveMenu,
 }) {
   const [open, setOpen] = useState(false);
-
   const Icon = item.icon;
-
   const hasChildren =
     item.dropdown &&
     item.children &&
     item.children.length > 0;
 
-const handleClick = () => {
-  if (item.dropdown) {
-    setOpen((prev) => !prev);
-    return;
-  }
+  const handleClick = () => {
+    if (item.dropdown) {
+      setOpen((prev) => !prev);
+      return;
+    }
 
-  setActiveMenu(item.label);
+    setActiveMenu(item.label);
 
-  if (onNavigate) {
-    const routes = {
-      "Tentang-Profil": "about-profile",
-      "Tentang-Visi Misi": "about-visi-misi",
-      "Beranda-Produk": "beranda-produk",
-      "Beranda-Konsultasi": "beranda-konsultasi",
-      "Beranda-Hubungi Tim": "beranda-hubungi-tim",
-      "Beranda-Mitra": "beranda-mitra",
-    };
+    if (onNavigate) {
+      const routes = {
+        "Tentang-Profil": "about-profile",
+        "Tentang-Visi Misi": "about-visi-misi",
+        "Beranda-Produk": "beranda-produk",
+        "Beranda-Konsultasi": "beranda-konsultasi",
+        "Beranda-Hubungi Tim": "beranda-hubungi-tim",
+        "Beranda-Mitra": "beranda-mitra",
+        "Projek-Kategori": "project-kategori",
+        "Projek-Detail": "project-detail",
+      };
 
-    const page =
-      routes[item.label] ||
-      item.label.toLowerCase().replace(/\s+/g, "-");
+      const page =
+        routes[item.label] ||
+        item.label.toLowerCase().replace(/\s+/g, "-");
 
-    onNavigate(page);
-  }
-};
+      onNavigate(page);
+    }
+  };
 
   return (
     <div className="sidebar-item-wrapper">
       <button
-className={`sidebar-item ${
-  level === 0 ? "sidebar-item-main" : "sidebar-item-child"
-} ${activeMenu === item.label ? "active" : ""}`}
+        className={`sidebar-item ${
+          level === 0 ? "sidebar-item-main" : "sidebar-item-child"
+        } ${activeMenu === item.label ? "active" : ""}`}
         style={{
           paddingLeft: `${
             level === 0 ? 4 : 28 + level * 12
@@ -86,16 +82,16 @@ className={`sidebar-item ${
 
       {hasChildren && open && (
         <div className="sidebar-children">
-{item.children.map((child) => (
-  <SidebarItem
-    key={child.label}
-    item={child}
-    level={level + 1}
-    onNavigate={onNavigate}
-    activeMenu={activeMenu}
-    setActiveMenu={setActiveMenu}
-  />
-))}
+          {item.children.map((child) => (
+            <SidebarItem
+              key={child.label}
+              item={child}
+              level={level + 1}
+              onNavigate={onNavigate}
+              activeMenu={activeMenu}
+              setActiveMenu={setActiveMenu}
+            />
+          ))}
         </div>
       )}
     </div>
@@ -103,11 +99,8 @@ className={`sidebar-item ${
 }
 
 export default function Sidebar({ collapsed, onNavigate }) {
-  const [activeMenu, setActiveMenu] =
-    useState("Dashboard");
-
-  const DashboardIcon =
-    navigation.dashboard.icon;
+  const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const DashboardIcon = navigation.dashboard.icon;
 
   return (
     <aside
@@ -128,33 +121,22 @@ export default function Sidebar({ collapsed, onNavigate }) {
 
       {/* DASHBOARD */}
       <section className="sidebar-section">
-        <h3 className="sidebar-title">
-          DASHBOARD
-        </h3>
+        <h3 className="sidebar-title">DASHBOARD</h3>
 
         <button
           className={`dashboard-menu ${
-            activeMenu === "Dashboard"
-              ? "active"
-              : ""
+            activeMenu === "Dashboard" ? "active" : ""
           }`}
           onClick={() => {
             setActiveMenu("Dashboard");
-
             if (onNavigate) {
               onNavigate("dashboard");
             }
           }}
           type="button"
         >
-          <DashboardIcon
-            size={15}
-            strokeWidth={1.8}
-          />
-
-          <span>
-            {navigation.dashboard.title}
-          </span>
+          <DashboardIcon size={15} strokeWidth={1.8} />
+          <span>{navigation.dashboard.title}</span>
         </button>
       </section>
 
@@ -162,19 +144,17 @@ export default function Sidebar({ collapsed, onNavigate }) {
 
       {/* SETTINGS */}
       <section className="sidebar-section">
-        <h3 className="sidebar-title">
-          SETTINGS
-        </h3>
+        <h3 className="sidebar-title">SETTINGS</h3>
 
         <div className="sidebar-navigation">
           {navigation.settings.map((item) => (
-<SidebarItem
-  key={item.label}
-  item={item}
-  onNavigate={onNavigate}
-  activeMenu={activeMenu}
-  setActiveMenu={setActiveMenu}
-/>
+            <SidebarItem
+              key={item.label}
+              item={item}
+              onNavigate={onNavigate}
+              activeMenu={activeMenu}
+              setActiveMenu={setActiveMenu}
+            />
           ))}
         </div>
       </section>

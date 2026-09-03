@@ -10,7 +10,10 @@ import FeaturedProductForm from "./Beranda/FeaturedProductForm";
 import ConsultationForm from "./Beranda/ConsultationForm";
 import ContactTeamForm from "./Beranda/ContactTeamForm";
 import PartnerForm from "./Beranda/PartnerForm";
+import Article from "./pages/Article";
 import "./styles/global.css";
+import ProjectKategori from "./pages/ProjectKategori";
+import ProjectDetail from "./pages/ProjectDetail";
 import AboutProfile from "./pages/AboutProfile";
 import AboutVisiMisi from "./pages/AboutVisiMisi";
 import Certificate from "./pages/Certificate";
@@ -22,6 +25,9 @@ function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  
+  // State untuk menyimpan data projek yang sedang diedit (atau null jika tambah baru)
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const toggleSidebar = () => {
     setSidebarCollapsed((prev) => !prev);
@@ -31,7 +37,15 @@ function App() {
     setCurrentPage(page);
 
     if (data) {
-      setSelectedCertificate(data);
+      if (page.includes("certificate")) {
+        setSelectedCertificate(data);
+      } else if (page === "project-detail") {
+        setSelectedProject(data);
+      }
+    } else {
+      if (page === "project-detail") {
+        setSelectedProject(null);
+      }
     }
   };
 
@@ -46,7 +60,6 @@ function App() {
       case "activity":
         return <Activity />;
 
-      // Navigasi ke Form Beranda
       case "beranda-produk":
       case "produk-unggulan":
         return <FeaturedProductForm />;
@@ -59,10 +72,33 @@ function App() {
       case "hubungi-tim":
         return <ContactTeamForm />;
 
-      // Menambahkan case untuk PartnerForm / Mitra
       case "beranda-mitra":
       case "mitra":
         return <PartnerForm />;
+
+      case "artikel":
+      case "article":
+        return <Article onNavigate={handleNavigate} />;
+
+      // ==========================================
+      // ROUTE HALAMAN PROJEK PORTOFOLIO
+      // ==========================================
+      case "project-kategori":
+      case "projek":
+        return <ProjectKategori onNavigate={handleNavigate} />;
+
+      case "project-detail":
+        return (
+          <ProjectDetail
+            project={selectedProject}
+            onBack={() => handleNavigate("project-kategori")}
+            onSave={(savedProject) => {
+              console.log("Projek disimpan:", savedProject);
+              handleNavigate("project-kategori");
+            }}
+          />
+        );
+      // ==========================================
 
       case "about-profile":
         return <AboutProfile />;
@@ -93,17 +129,17 @@ function App() {
           />
         );
 
-        case "certificate-add":
-  return (
-    <CertificateAdd
-      onBack={() => handleNavigate("sertifikat")}
-      onSave={(newCertificate) => {
-        console.log("Data baru:", newCertificate);
-        handleNavigate("sertifikat");
-      }}
-    />
-  );
-  
+      case "certificate-add":
+        return (
+          <CertificateAdd
+            onBack={() => handleNavigate("sertifikat")}
+            onSave={(newCertificate) => {
+              console.log("Data baru:", newCertificate);
+              handleNavigate("sertifikat");
+            }}
+          />
+        );
+
       case "dashboard":
       default:
         return <Dashboard />;
@@ -114,7 +150,7 @@ function App() {
     <div className={`app ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
       <Sidebar collapsed={sidebarCollapsed} onNavigate={handleNavigate} />
 
-      <main className="main-content">
+      <main className="flex-1 w-full min-h-screen bg-[#F8F4E9]">
         <Navbar onMenuClick={toggleSidebar} onNavigate={handleNavigate} />
 
         {renderPage()}

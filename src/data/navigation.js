@@ -54,7 +54,17 @@ export const navigation = {
         // =========================
         { label: "Sertifikat" },
         { label: "Artikel" },
-        { label: "Projek" },
+
+        // DROPDOWN PROJEK
+        {
+          label: "Projek",
+          dropdown: true,
+          children: [
+            { label: "Projek-Kategori" },
+            { label: "Projek-Detail" },
+          ],
+        },
+
         { label: "FAQ" },
         { label: "Karir" },
         { label: "Lokasi" },
