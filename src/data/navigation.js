@@ -4,9 +4,7 @@ import {
   Grid3X3,
   UsersRound,
   Mail,
-  ChevronDown,
   LayoutDashboard,
-  FileText,
 } from "lucide-react";
 
 export const navigation = {
@@ -21,7 +19,17 @@ export const navigation = {
       icon: Settings,
       dropdown: true,
       children: [
-        { label: "Beranda" },
+        // Sub-menu Beranda dibuat dropdown dengan anak menu
+        {
+          label: "Beranda",
+          dropdown: true,
+          children: [
+            { label: "Beranda-Produk" },
+            { label: "Beranda-Konsultasi" },
+            { label: "Beranda-Hubungi Tim" },
+            { label: "Beranda-Mitra" },
+          ],
+        },
         { label: "Tentang Kami" },
         { label: "Sertifikat" },
         { label: "Artikel" },

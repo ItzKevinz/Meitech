@@ -1,24 +1,23 @@
 import { useState } from "react";
-
 import { ChevronDown } from "lucide-react";
-
-import { navigation } from "../data/Navigation";
-
+import { navigation } from "../data/navigation";
 import "../styles/sidebar.css";
-
 import logoMeitech from "../assets/logo-meitech.png";
 
-function SidebarItem({ item, level = 0 }) {
+function SidebarItem({ item, level = 0, onNavigate }) {
   const [open, setOpen] = useState(false);
-
   const Icon = item.icon;
+  
+  // Cek apakah menu memiliki turunan dropdown
+  const hasChildren = Boolean(item.dropdown && item.children && item.children.length > 0);
 
-  const hasChildren =
-    item.dropdown && item.children && item.children.length > 0;
-
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
     if (item.dropdown) {
       setOpen((prev) => !prev);
+    } else if (onNavigate) {
+      const route = item.label.toLowerCase().replace(/\s+/g, "-");
+      onNavigate(route);
     }
   };
 
@@ -29,28 +28,40 @@ function SidebarItem({ item, level = 0 }) {
           level === 0 ? "sidebar-item-main" : "sidebar-item-child"
         }`}
         style={{
-          paddingLeft: `${level === 0 ? 4 : 28 + level * 12}px`,
+          paddingLeft: `${level === 0 ? 12 : 24 + level * 8}px`,
         }}
         onClick={handleClick}
         type="button"
       >
-        {Icon && <Icon size={15} strokeWidth={1.8} />}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          {Icon && <Icon size={15} strokeWidth={1.8} />}
+          <span>{item.label}</span>
+        </div>
 
-        <span>{item.label}</span>
-
+        {/* Tampilkan ikon panah jika memiliki sub-menu */}
         {item.dropdown && (
           <ChevronDown
             className={`sidebar-chevron ${open ? "sidebar-chevron-open" : ""}`}
             size={14}
             strokeWidth={1.7}
+            style={{
+              transform: open ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.2s ease"
+            }}
           />
         )}
       </button>
 
+      {/* Render anak menu rekursif jika status open true */}
       {hasChildren && open && (
         <div className="sidebar-children">
           {item.children.map((child) => (
-            <SidebarItem key={child.label} item={child} level={level + 1} />
+            <SidebarItem
+              key={child.label}
+              item={child}
+              level={level + 1}
+              onNavigate={onNavigate}
+            />
           ))}
         </div>
       )}
@@ -60,7 +71,6 @@ function SidebarItem({ item, level = 0 }) {
 
 export default function Sidebar({ collapsed, onNavigate }) {
   const [activeMenu, setActiveMenu] = useState("Dashboard");
-
   const DashboardIcon = navigation.dashboard.icon;
 
   return (
@@ -76,19 +86,19 @@ export default function Sidebar({ collapsed, onNavigate }) {
       <section className="sidebar-section">
         <h3 className="sidebar-title">DASHBOARD</h3>
 
-<button
-  className={`dashboard-menu ${
-    activeMenu === "Dashboard" ? "active" : ""
-  }`}
-  onClick={() => {
-    setActiveMenu("Dashboard");
-    onNavigate("dashboard");
-  }}
-  type="button"
->
-  <DashboardIcon size={15} strokeWidth={1.8} />
-  <span>{navigation.dashboard.title}</span>
-</button>
+        <button
+          className={`dashboard-menu ${
+            activeMenu === "Dashboard" ? "active" : ""
+          }`}
+          onClick={() => {
+            setActiveMenu("Dashboard");
+            onNavigate("dashboard");
+          }}
+          type="button"
+        >
+          <DashboardIcon size={15} strokeWidth={1.8} />
+          <span>{navigation.dashboard.title}</span>
+        </button>
       </section>
 
       <div className="sidebar-divider section-divider"></div>
@@ -99,7 +109,11 @@ export default function Sidebar({ collapsed, onNavigate }) {
 
         <div className="sidebar-navigation">
           {navigation.settings.map((item) => (
-            <SidebarItem key={item.label} item={item} />
+            <SidebarItem
+              key={item.label}
+              item={item}
+              onNavigate={onNavigate}
+            />
           ))}
         </div>
       </section>
