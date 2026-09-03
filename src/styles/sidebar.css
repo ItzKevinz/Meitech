@@ -1,0 +1,264 @@
+.sidebar {
+  width: 164px;
+  min-width: 164px;
+  min-height: 100vh;
+
+  background: #faf9f4;
+
+  padding: 28px 16px;
+
+  box-sizing: border-box;
+
+  font-family: "Nunito Sans", sans-serif;
+  color: #151515;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.sidebar-logo {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 4px;
+  margin-bottom: 16px;
+}
+
+.sidebar-logo {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 4px;
+  margin-bottom: 16px;
+}
+
+.meitech-logo {
+  width: 132px;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+}
+/* =========================
+   DIVIDER
+========================= */
+
+.sidebar-divider {
+  width: 100%;
+  height: 1px;
+
+  background: #FDCB01;
+
+  margin-bottom: 8px;
+}
+
+.section-divider {
+  margin-top: 2px;
+  margin-bottom: 7px;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.sidebar-section {
+  width: 100%;
+}
+
+.sidebar-title {
+  margin: 0 0 5px;
+  padding-left: 4px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+
+  color: #FDCB01;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-menu {
+  width: 100%;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border: none;
+  border-radius: 5px;
+
+  padding: 0 5px;
+
+  background: transparent;
+  color: #222;
+
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.dashboard-menu:hover {
+  background: #ffe58a;
+}
+
+.dashboard-menu.active {
+  background: #FDCB01;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.sidebar-navigation {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1px;
+}
+
+.sidebar-item-wrapper {
+  width: 100%;
+}
+
+.sidebar-item {
+  width: 100%;
+  min-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border: none;
+  background: transparent;
+
+  color: #222;
+
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+.sidebar-item:hover {
+  background: #f5f0dc;
+
+  border-radius: 4px;
+}
+
+.sidebar-item-main {
+  padding-right: 4px;
+}
+
+.sidebar-item-child {
+  min-height: 25px;
+
+  padding-right: 4px;
+
+  font-size: 8.5px;
+  font-weight: 500;
+}
+
+.sidebar-item-child span {
+  white-space: nowrap;
+}
+
+/* =========================
+   CHEVRON
+========================= */
+
+.sidebar-chevron {
+  margin-left: auto;
+
+  transition: transform 0.2s ease;
+}
+
+.sidebar-chevron-open {
+  transform: rotate(180deg);
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.sidebar-children {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================
+   COLLAPSED SIDEBAR
+========================= */
+
+.sidebar.collapsed {
+  width: 70px;
+  min-width: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* LOGO */
+.sidebar.collapsed .sidebar-logo {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar.collapsed .meitech-logo {
+  width: 48px;
+}
+
+/* HILANGKAN TEXT */
+.sidebar.collapsed .sidebar-title {
+  display: none;
+}
+
+.sidebar.collapsed .dashboard-menu span {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-item span {
+  display: none;
+}
+
+/* HILANGKAN CHEVRON */
+.sidebar.collapsed .sidebar-chevron {
+  display: none;
+}
+
+/* CENTER ICON */
+.sidebar.collapsed .dashboard-menu,
+.sidebar.collapsed .sidebar-item {
+  justify-content: center;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  gap: 0;
+}
+
+/* CHILDREN */
+.sidebar.collapsed .sidebar-children {
+  display: none;
+}

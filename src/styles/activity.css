@@ -1,0 +1,186 @@
+.activity-page {
+  width: 100%;
+  padding: 0 8px 30px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.activity-title {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+
+  margin-bottom: 8px;
+}
+
+.activity-title span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* =========================
+   ACTIVITY CARD
+========================= */
+
+.activity-card {
+  width: 100%;
+  min-height: 540px;
+
+  padding: 40px 42px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   DATE
+========================= */
+
+.activity-date {
+  margin: 0 0 16px;
+
+  font-size: 13px;
+  font-weight: 700;
+  color: #68727c;
+}
+
+/* =========================
+   ITEM
+========================= */
+
+.activity-item {
+  display: flex;
+  width: 100%;
+}
+
+.activity-timeline {
+  width: 56px;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.activity-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fdcb01;
+  color: #111;
+
+  position: relative;
+  z-index: 2;
+}
+
+.activity-add {
+  background: #fdcb01;
+}
+
+.activity-edit {
+  background: #fdcb01;
+}
+
+.activity-delete {
+  background: #fdcb01;
+}
+
+.activity-line {
+  position: absolute;
+
+  top: 34px;
+  bottom: -18px;
+
+  width: 2px;
+
+  background: #9aa3a3;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.activity-content {
+  flex: 1;
+  padding-bottom: 18px;
+}
+
+.activity-info {
+  width: 100%;
+  min-height: 58px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 4px;
+
+  padding: 7px 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #555;
+  border-radius: 3px;
+
+  background: #fff;
+}
+
+.activity-time {
+  flex-shrink: 0;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  color: #555;
+
+  margin: 0;
+}
+
+.activity-description {
+  font-size: 8px;
+  font-weight: 500;
+
+  color: #777;
+
+  margin: 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .activity-card {
+    padding: 25px 18px;
+  }
+
+  .activity-timeline {
+    width: 45px;
+  }
+}

@@ -1,0 +1,312 @@
+.profile-edit-page {
+  width: 100%;
+  padding: 0 16px 30px;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.profile-edit-title {
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+
+  margin-bottom: 8px;
+}
+
+.profile-edit-title span {
+  font-size: 12px;
+  font-weight: 800;
+  color: #151515;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.profile-edit-card {
+  width: 100%;
+  min-height: 490px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+
+  padding: 20px 18px;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   AVATAR
+========================= */
+
+.profile-edit-avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 28px;
+}
+
+.profile-edit-avatar {
+  width: 90px;
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  color: #111111;
+}
+
+.profile-edit-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+/* =========================
+   CHOOSE PHOTO
+========================= */
+
+.choose-photo-button {
+  margin-top: 6px;
+
+  padding: 3px 12px;
+
+  background: #d8dfdf;
+  color: #888888;
+
+  border-radius: 3px;
+
+  font-size: 10px;
+  font-style: italic;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.18);
+}
+
+.choose-photo-button:hover {
+  background: #cbd3d3;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.profile-form {
+  width: 70%;
+  max-width: 650px;
+
+  margin: 0 auto;
+}
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 9px;
+}
+
+.profile-form-group label {
+  margin-bottom: 3px;
+
+  font-size: 8px;
+  font-weight: 500;
+
+  color: #555555;
+}
+
+.profile-form-group input {
+  width: 100%;
+  height: 32px;
+
+  padding: 0 9px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+
+  background: #ffffff;
+
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 9px;
+
+  outline: none;
+
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.14);
+}
+
+.profile-form-group input:focus {
+  border-color: #fdcb01;
+}
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.profile-save-button {
+  margin-top: 14px;
+
+  padding: 5px 18px;
+
+  border: none;
+  border-radius: 3px;
+
+  background: #fdcb01;
+  color: #111111;
+
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.profile-save-button:hover {
+  background: #eebe00;
+}
+
+/* =========================
+   UPLOAD MODAL
+========================= */
+
+.upload-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  z-index: 9999;
+}
+
+.upload-modal {
+  position: relative;
+
+  width: 290px;
+  min-height: 145px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.18);
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.upload-modal-close {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  color: #555555;
+
+  cursor: pointer;
+}
+
+.upload-modal-close:hover {
+  color: #111111;
+}
+
+/* =========================
+   UPLOAD BUTTON
+========================= */
+
+.upload-button {
+  min-width: 92px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+
+  background: #ffffff;
+
+  color: #333333;
+
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background: #f7f7f7;
+}
+
+/* =========================
+   HINT
+========================= */
+
+.upload-hint {
+  margin: 6px 0 0;
+
+  font-family: "Nunito Sans", sans-serif;
+
+  font-size: 8px;
+  font-style: italic;
+
+  color: #777777;
+}
