@@ -19,32 +19,48 @@ function SidebarItem({
     item.children.length > 0;
 
   const handleClick = () => {
-    if (item.dropdown) {
-      setOpen((prev) => !prev);
-      return;
-    }
+  // Kalau punya children, buka/tutup dropdown
+  if (hasChildren) {
+    setOpen((prev) => !prev);
+    return;
+  }
 
-    setActiveMenu(item.label);
+  setActiveMenu(item.label);
 
-    if (onNavigate) {
-      const routes = {
-        "Tentang-Profil": "about-profile",
-        "Tentang-Visi Misi": "about-visi-misi",
-        "Beranda-Produk": "beranda-produk",
-        "Beranda-Konsultasi": "beranda-konsultasi",
-        "Beranda-Hubungi Tim": "beranda-hubungi-tim",
-        "Beranda-Mitra": "beranda-mitra",
-        "Projek-Kategori": "project-kategori",
-        "Projek-Detail": "project-detail",
-      };
+  if (!onNavigate) return;
 
-      const page =
-        routes[item.label] ||
-        item.label.toLowerCase().replace(/\s+/g, "-");
+  const routes = {
+    // Beranda
+    "Beranda-Produk": "beranda-produk",
+    "Beranda-Konsultasi": "beranda-konsultasi",
+    "Beranda-Hubungi Tim": "beranda-hubungi-tim",
+    "Beranda-Mitra": "beranda-mitra",
 
-      onNavigate(page);
-    }
+    // Tentang Kami
+    "Tentang-Profil": "about-profile",
+    "Tentang-Visi Misi": "about-visi-misi",
+
+    // Projek
+    "Projek-Kategori": "project-kategori",
+    "Projek-Detail": "project-detail",
+
+    // Top General
+    "Top-beranda": "top-beranda",
+    "Top-tentang kami": "top-tentang-kami",
+    "Top-katalog produk": "top-katalog-produk",
+    "Top-produk": "top-produk",
+    "Top-artikel": "top-artikel",
+    "Top-projek": "top-projek",
+    "Top-FAQ": "top-faq",
+    "Top-karir": "top-karir",
   };
+
+  const page =
+    routes[item.label] ||
+    item.label.toLowerCase().replace(/\s+/g, "-");
+
+  onNavigate(page);
+};
 
   return (
     <div className="sidebar-item-wrapper">

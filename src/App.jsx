@@ -24,6 +24,10 @@ import FAQCategory from "./pages/FAQCategory";
 import FAQDetail from "./pages/FAQDetail";
 import Location from "./pages/Location";
 import Career from "./pages/Career";
+import TopBeranda from "./pages/Top-general/TopBeranda";
+import TopTentangKami from "./pages/Top-general/TopTentangKami";
+import TopKatalogProduk from "./pages/Top-general/TopKatalogProduk";
+import TopProduk from "./pages/Top-general/TopProduk";
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -203,6 +207,18 @@ case "location":
   case "karir":
 case "career":
   return <Career />;
+
+  case "top-beranda":
+  return <TopBeranda />;
+
+  case "top-tentang-kami":
+  return <TopTentangKami />;
+
+  case "top-katalog-produk":
+  return <TopKatalogProduk />;
+
+  case "top-produk":
+  return <TopProduk />;
 
       case "dashboard":
       default:
