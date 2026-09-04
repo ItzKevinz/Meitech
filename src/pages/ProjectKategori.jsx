@@ -2,10 +2,9 @@ import { useState, useRef } from 'react';
 import { Save, X, ArrowLeft, Upload } from 'lucide-react';
 
 const ProjectKategori = () => {
-  // State Mode Tampilan: 'list' (Tabel Utama) atau 'form' (Form Tambah/Edit Projek)
   const [viewMode, setViewMode] = useState('list');
 
-  // State Form Utama (Judul & Sub Judul Section)
+  // State Form Utama
   const [formData, setFormData] = useState({
     title: '',
     title_en: '',
@@ -13,7 +12,7 @@ const ProjectKategori = () => {
     subtitle_en: ''
   });
 
-  // State Daftar Item Projek Portofolio (Dummy)
+  // State Daftar Item Projek Portofolio
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -37,7 +36,7 @@ const ProjectKategori = () => {
     }
   ]);
 
-  // State Form Item Projek (Tambah/Edit)
+  // State Form Item Projek
   const [editingItemId, setEditingItemId] = useState(null);
   const [projectInput, setProjectInput] = useState({
     type: '',
@@ -69,7 +68,7 @@ const ProjectKategori = () => {
     setProjectInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handler Buka Form Tambah Projek (Pindah Tampilan)
+  // Handler Buka Form Tambah Projek
   const handleOpenAddForm = () => {
     setEditingItemId(null);
     setProjectInput({
@@ -85,7 +84,7 @@ const ProjectKategori = () => {
     setViewMode('form');
   };
 
-  // Handler Buka Form Edit Projek (Pindah Tampilan)
+  // Handler Buka Form Edit Projek
   const handleOpenEditForm = (item) => {
     setEditingItemId(item.id);
     setProjectInput({
@@ -160,7 +159,7 @@ const ProjectKategori = () => {
       setProjects((prev) => [...prev, newItem]);
     }
 
-    setViewMode('list'); // Kembali ke tampilan tabel
+    setViewMode('list'); 
   };
 
   // Handler Modal Hapus
@@ -186,9 +185,7 @@ const ProjectKategori = () => {
     <div className="bg-[#F8F4E9] min-h-screen p-6 md:p-10 font-sans w-full relative text-left">
       <div className="w-full flex flex-col gap-6">
         
-        {/* ========================================================= */}
-        {/* TAMPILAN 1: LIST UTAMA (Pake FLEXBOX)                     */}
-        {/* ========================================================= */}
+        {/* TAMPILAN 1: */}
         {viewMode === 'list' && (
           <>
             {/* Header Title 'Projek-Portofolio' */}
@@ -264,7 +261,7 @@ const ProjectKategori = () => {
                   />
                 </div>
 
-                {/* Tombol Tambah Projek Portofolio */}
+                {/* Tambah  Portofolio */}
                 <div className="flex justify-start mt-2">
                   <button
                     type="button"
@@ -275,7 +272,7 @@ const ProjectKategori = () => {
                   </button>
                 </div>
 
-                {/* TAMPILAN PORTOFOLIO RAPAH BERBASIS FLEXBOX (ANTI-GESER) */}
+                {/* TAMPILAN PORTOFOLIO  */}
                 <div className="border border-[#D1D5DB] rounded-2xl overflow-hidden bg-white w-full shadow-xs mt-2">
                   
                   {/* HEADER FLEX */}
@@ -376,7 +373,7 @@ const ProjectKategori = () => {
           </>
         )}
 
-        {/* TAMPILAN 2: FORM TAMBAH / EDIT PROJEK (viewMode === 'form') */}
+        {/* TAMPILAN 2*/}
         {viewMode === 'form' && (
           <div className="w-full flex flex-col gap-6">
             

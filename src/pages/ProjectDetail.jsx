@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { X, ArrowLeft, Upload, Edit, Trash2 } from 'lucide-react';
 
 const ProjectDetail = () => {
-  // Mode Tampilan: 'list' (Tabel Projek-list) atau 'form' (Form Tambah/Edit Projek-Detail)
   const [viewMode, setViewMode] = useState('list');
 
   // State Daftar Item Projek Detail
@@ -27,7 +26,7 @@ const ProjectDetail = () => {
     }
   ]);
 
-  // State Form Input Projek LENGKAP
+  // State Form Input Projek 
   const [editingItemId, setEditingItemId] = useState(null);
   const [projectInput, setProjectInput] = useState({
     projectName: '',
@@ -42,14 +41,14 @@ const ProjectDetail = () => {
     sistemUtama: '',
     quotesText: '',
     
-    // Tantangan Indonesia: 2 Kolom Kiri & Kanan
+    // Tantangan Indonesia
     tantanganList: [
       { left: '', right: '' },
       { left: '', right: '' },
       { left: '', right: '' }
     ],
     
-    // Tantangan Bahasa Inggris: 2 Kolom Kiri & Kanan
+    // Tantangan Bahasa Inggris
     tantanganEnList: [
       { left: '', right: '' },
       { left: '', right: '' },
@@ -74,9 +73,9 @@ const ProjectDetail = () => {
     // State Upload Gambar
     thumbnailPreview: null,
     tantanganPreview: null,
-    galleryBoxPreview: null, // Gambar di box upload galeri kiri
+    galleryBoxPreview: null, 
 
-    // Daftar File Pajangan di Kanan
+    // image kanan
     galleryFiles: [
       { id: 1, name: 'gambar.png' },
       { id: 2, name: 'gambar1.png' },
@@ -90,17 +89,17 @@ const ProjectDetail = () => {
   const tantanganInputRef = useRef(null);
   const galleryInputRef = useRef(null);
 
-  // State Modal Hapus Custom
+  // State Modal Hapus 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingItemId, setDeletingItemId] = useState(null);
 
-  // Handler Input Biasa
+  // Handler Input 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProjectInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handler Tabel Tantangan (Indonesia - 2 Kolom)
+  // Handler Tabel Tantangan 
   const handleTantanganChange = (index, colKey, value) => {
     setProjectInput((prev) => {
       const updated = [...prev.tantanganList];
@@ -116,7 +115,7 @@ const ProjectDetail = () => {
     }));
   };
 
-  // Handler Tabel Tantangan (Bahasa Inggris - 2 Kolom)
+  // Handler Tabel Tantangan
   const handleTantanganEnChange = (index, colKey, value) => {
     setProjectInput((prev) => {
       const updated = [...prev.tantanganEnList];
@@ -319,9 +318,7 @@ const ProjectDetail = () => {
     <div className="bg-[#F8F4E9] min-h-screen p-6 md:p-10 font-sans w-full relative text-left">
       <div className="w-full flex flex-col gap-6">
 
-        {/* ========================================================= */}
-        {/* TAMPILAN 1: LIST UTAMA (viewMode === 'list')               */}
-        {/* ========================================================= */}
+        {/* TAMPILAN 1:      */}
         {viewMode === 'list' && (
           <>
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm text-left w-full">
@@ -420,9 +417,7 @@ const ProjectDetail = () => {
           </>
         )}
 
-        {/* ========================================================= */}
-        {/* TAMPILAN 2: FORM TAMBAH / EDIT LENGKAP                   */}
-        {/* ========================================================= */}
+        {/* TAMPILAN 2*/}
         {viewMode === 'form' && (
           <div className="w-full flex flex-col gap-6">
             
@@ -460,7 +455,7 @@ const ProjectDetail = () => {
                   />
                 </div>
 
-                {/* 2. NAMA PROJECT DALAM BAHASA INGGRIS */}
+                {/* 2. NAMA PROJECT  INGGRIS */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-xs font-bold leading-4 tracking-[0.6px] text-[#555555] uppercase">
                     NAMA PROJECT DALAM BAHASA INGGRIS
@@ -588,7 +583,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                {/* 9. TABEL TANTANGAN DAN SOLUSI (INDONESIA - 2 KOLOM KANAN & KIRI) */}
+                {/* 9. TABEL TANTANGAN DAN SOLUSI */}
                 <div className="flex flex-col items-start gap-2 w-full mt-2">
                   <label className="text-xs font-bold text-[#555555]">
                     Tantangan dan solusi
@@ -635,7 +630,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                {/* 10. TABEL SPESIFIKASI (INDONESIA) */}
+                {/* 10. TABEL SPESIFIKASI INDONESIA */}
                 <div className="flex flex-col items-start gap-2 w-full mt-2">
                   <label className="text-xs font-bold text-[#555555] uppercase">
                     SPESIFIKASI
@@ -678,7 +673,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                {/* 11. TABEL TANTANGAN DAN SOLUSI DALAM BAHASA INGGRIS (2 KOLOM KANAN & KIRI) */}
+                {/* 11. TABEL TANTANGAN DAN SOLUSI DALAM BAHASA INGGRIS */}
                 <div className="flex flex-col items-start gap-2 w-full mt-2">
                   <label className="text-xs font-bold text-[#555555]">
                     Tantangan dan solusi dalam bahasa inggris
@@ -913,7 +908,7 @@ const ProjectDetail = () => {
                   </label>
                   <div className="border border-[#D1D5DB] rounded-2xl p-6 bg-white w-full flex flex-col md:flex-row items-center gap-8">
                     
-                    {/* Input file tersembunyi khusus untuk box galeri kiri */}
+                    {/* Input file  */}
                     <input
                       type="file"
                       ref={galleryInputRef}
@@ -970,7 +965,7 @@ const ProjectDetail = () => {
                       )}
                     </div>
 
-                    {/* List File Terupload Kanan (MURNI PAJANGAN VISUAL SAJA, TIDAK AKAN HILANG JIKA DIKLIK) */}
+                    {/* List File Terupload */}
                     <div className="flex flex-col gap-3 w-full max-w-[420px]">
                       {projectInput.galleryFiles.map((f) => (
                         <div key={f.id} className="flex items-center gap-3 w-full">
@@ -994,7 +989,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                {/* Tombol Simpan Hijau (#00D000) di Paling Bawah */}
+                {/* Tombol Simpan Hijau */}
                 <div className="flex justify-start mt-6">
                   <button
                     type="submit"
@@ -1012,7 +1007,7 @@ const ProjectDetail = () => {
 
       </div>
 
-      {/* MODAL HAPUS CUSTOM */}
+      {/* hpus*/}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-[580px] overflow-hidden text-left animate-in fade-in zoom-in-95 duration-150">
@@ -1042,7 +1037,7 @@ const ProjectDetail = () => {
                   className="bg-[#FDE047] hover:bg-[#facc15] text-[#111827] font-semibold text-sm px-6 py-2.5 rounded-lg border-none cursor-pointer"
                 >
                   Kembali
-                  
+
                 </button>
                 <button
                   type="button"

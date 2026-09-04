@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Save, X } from 'lucide-react';
 
 const PartnerForm = () => {
-  // State form utama (Judul & Footer)
+  // State form utama
   const [formData, setFormData] = useState({
     title: '',
     title_en: '',
@@ -10,7 +10,7 @@ const PartnerForm = () => {
     footer_text_en: ''
   });
 
-  // State daftar mitra dummy
+  // State daftar mitra 
   const [partners, setPartners] = useState([
     {
       id: 1,
@@ -24,7 +24,7 @@ const PartnerForm = () => {
     }
   ]);
 
-  // State untuk kontrol form Tambah/Edit Mitra
+  //  Tambah/Edit 
   const [showPartnerModal, setShowPartnerModal] = useState(false);
   const [editingPartnerId, setEditingPartnerId] = useState(null);
   const [partnerInput, setPartnerInput] = useState({
@@ -33,7 +33,7 @@ const PartnerForm = () => {
   });
   const [partnerLogoPreview, setPartnerLogoPreview] = useState(null);
 
-  // State untuk Modal Hapus Custom
+  // State untuk Modal Hapus 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingPartnerId, setDeletingPartnerId] = useState(null);
 
@@ -96,7 +96,7 @@ const PartnerForm = () => {
     }
   };
 
-  // Handler simpan mitra baru / update mitra
+  // Handler simpan mita edit atau bbaru
   const handleSavePartner = (e) => {
     e.preventDefault();
     if (!partnerInput.name.trim()) {
@@ -153,7 +153,7 @@ const PartnerForm = () => {
           <h2 className="text-2xl font-semibold text-[#1A1A1A] mb-4">Mitra</h2>
           <hr className="border-t border-[#EAEAEA] mb-8" />
 
-          {/* JIKA MODAL TAMBAH/EDIT MITRA SEDANG DIBUKA */}
+          {/*  TAMBAH/EDIT MITRA  */}
           {showPartnerModal ? (
             <div className="flex flex-col gap-6 w-full">
               {/* Form Input Nama Mitra */}
@@ -172,7 +172,7 @@ const PartnerForm = () => {
                 />
               </div>
 
-              {/* Logo Mitra / Choose File */}
+              {/*  Choose File */}
               <div className="flex flex-col items-start gap-2 w-full">
                 <label className="text-[12px] font-bold leading-4 tracking-[0.6px] text-[#3D4947] uppercase">
                   LOGO MITRA
@@ -211,7 +211,7 @@ const PartnerForm = () => {
                 </div>
               </div>
 
-              {/* Tombol Simpan Mitra (Warna #7EC07E) */}
+              {/* Tombol Simpan Mitra */}
               <div className="flex justify-end items-center mt-2">
                 <button
                   type="button"
@@ -224,7 +224,6 @@ const PartnerForm = () => {
               </div>
             </div>
           ) : (
-            /* TAMPILAN UTAMA (FORM HEADER + TEKS FOOTER + TABEL MITRA FLEXBOX) */
             <form onSubmit={handleSubmit} className="flex flex-col gap-7 w-full">
               {/* Field 1: JUDUL */}
               <div className="flex flex-col items-start gap-2 w-full">
@@ -298,7 +297,7 @@ const PartnerForm = () => {
                   </button>
                 </div>
 
-                {/* STRUKTUR TABEL MITRA BERBASIS FLEXBOX (ANTI-GESER & PRESISI) */}
+                {/*  TABEL MITRA */}
                 <div className="border border-[#D1D5DB] rounded-2xl overflow-hidden bg-white w-full shadow-xs mt-2">
                   
                   {/* HEADER FLEX */}
@@ -359,7 +358,7 @@ const PartnerForm = () => {
                 </div>
               </div>
 
-              {/* Tombol Simpan Utama (Warna #7EC07E) */}
+              {/* Tombol Simpan Utaa*/}
               <div className="flex justify-end mt-2">
                 <button
                   type="submit"
@@ -376,7 +375,6 @@ const PartnerForm = () => {
 
       </div>
 
-      {/* MODAL HAPUS CUSTOM */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-[580px] overflow-hidden text-left animate-in fade-in zoom-in-95 duration-150">
@@ -392,7 +390,6 @@ const PartnerForm = () => {
               </button>
             </div>
 
-            {/* Isi Konfirmasi */}
             <div className="p-8 flex flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <h4 className="text-base font-bold text-[#111827] m-0">
@@ -403,7 +400,6 @@ const PartnerForm = () => {
                 </p>
               </div>
 
-              {/* Tombol Aksi Modal */}
               <div className="flex items-center gap-4 mt-2">
                 <button
                   type="button"

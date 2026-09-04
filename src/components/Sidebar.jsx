@@ -19,48 +19,64 @@ function SidebarItem({
     item.children.length > 0;
 
   const handleClick = () => {
-  // Kalau punya children, buka/tutup dropdown
-  if (hasChildren) {
-    setOpen((prev) => !prev);
-    return;
-  }
+    setActiveMenu(item.label);
 
-  setActiveMenu(item.label);
+    const routes = {
+      // Beranda
+      "Beranda-Produk": "beranda-produk",
+      "Beranda-Konsultasi": "beranda-konsultasi",
+      "Beranda-Hubungi Tim": "beranda-hubungi-tim",
+      "Beranda-Mitra": "beranda-mitra",
 
-  if (!onNavigate) return;
+      // Tentang Kami
+      "Tentang-Profil": "about-profile",
+      "Tentang-Visi Misi": "about-visi-misi",
 
-  const routes = {
-    // Beranda
-    "Beranda-Produk": "beranda-produk",
-    "Beranda-Konsultasi": "beranda-konsultasi",
-    "Beranda-Hubungi Tim": "beranda-hubungi-tim",
-    "Beranda-Mitra": "beranda-mitra",
+      // Produk
+      "Produk": "produk-kategori",
+      "Kategori": "produk-kategori",
+      "Produk-Kategori": "produk-kategori",
+      "list-Produk": "list-produk",
+      "List-Produk": "list-produk",
+      "Produk-Detail": "produk-detail",
 
-    // Tentang Kami
-    "Tentang-Profil": "about-profile",
-    "Tentang-Visi Misi": "about-visi-misi",
+      // Projek
+      "Projek": "project-kategori",
+      "Projek-Kategori": "project-kategori",
+      "Projek-Detail": "project-detail",
 
-    // Projek
-    "Projek-Kategori": "project-kategori",
-    "Projek-Detail": "project-detail",
+      // Lokasi
+      "Lokasi": "lokasi-settings",
+      "Lokasi-Settings": "lokasi-settings",
 
-    // Top General
-    "Top-beranda": "top-beranda",
-    "Top-tentang kami": "top-tentang-kami",
-    "Top-katalog produk": "top-katalog-produk",
-    "Top-produk": "top-produk",
-    "Top-artikel": "top-artikel",
-    "Top-projek": "top-projek",
-    "Top-FAQ": "top-faq",
-    "Top-karir": "top-karir",
+      // Top General
+      "Top-beranda": "top-beranda",
+      "Top-tentang kami": "top-tentang-kami",
+      "Top-katalog produk": "top-katalog-produk",
+      "Top-produk": "top-produk",
+      "Top-artikel": "top-artikel",
+      "Top-projek": "top-projek",
+      "Top-FAQ": "top-faq",
+      "Top-karir": "top-karir",
+    };
+
+    const page =
+      routes[item.label] ||
+      item.label.toLowerCase().replace(/\s+/g, "-");
+
+    // Jika punya children, buka dropdown dan navigate ke halaman default jika ada route-nya
+    if (hasChildren) {
+      setOpen((prev) => !prev);
+      if (onNavigate && routes[item.label]) {
+        onNavigate(page);
+      }
+      return;
+    }
+
+    if (onNavigate) {
+      onNavigate(page);
+    }
   };
-
-  const page =
-    routes[item.label] ||
-    item.label.toLowerCase().replace(/\s+/g, "-");
-
-  onNavigate(page);
-};
 
   return (
     <div className="sidebar-item-wrapper">

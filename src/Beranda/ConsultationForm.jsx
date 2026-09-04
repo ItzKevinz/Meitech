@@ -106,7 +106,7 @@ const ConsultationForm = () => {
               />
             </div>
 
-            {/* Tombol Simpan Kompak */}
+            {/* Tombol Simpan */}
             <div className="flex justify-end mt-2">
               <button
                 type="submit"

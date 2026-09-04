@@ -66,13 +66,13 @@ export const navigation = {
         },
 
         {
-  label: "FAQ",
-  dropdown: true,
-  children: [
-    { label: "FAQ Kategori" },
-    { label: "FAQ Detail" },
-  ],
-},
+          label: "FAQ",
+          dropdown: true,
+          children: [
+            { label: "FAQ Kategori" },
+            { label: "FAQ Detail" },
+          ],
+        },
         { label: "Karir" },
         { label: "Lokasi" },
 
@@ -82,16 +82,16 @@ export const navigation = {
         {
           label: "Top General",
           dropdown: true,
-children: [
-  { label: "Top-Beranda" },
-  { label: "Top-Tentang Kami" },
-  { label: "Top-Katalog Produk" },
-  { label: "Top-Produk" },
-  { label: "Top-Artikel" },
-  { label: "Top-Projek" },
-  { label: "Top-FAQ" },
-  { label: "Top-Karir" },
-],
+          children: [
+            { label: "Top-Beranda" },
+            { label: "Top-Tentang Kami" },
+            { label: "Top-Katalog Produk" },
+            { label: "Top-Produk" },
+            { label: "Top-Artikel" },
+            { label: "Top-Projek" },
+            { label: "Top-FAQ" },
+            { label: "Top-Karir" },
+          ],
         },
       ],
     },
@@ -103,7 +103,10 @@ children: [
       label: "Produk",
       icon: Package,
       dropdown: true,
-      children: [],
+      children: [
+        { label: "Kategori" },
+        { label: "list-Produk" },
+      ],
     },
 
     // =========================
