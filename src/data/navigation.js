@@ -112,11 +112,15 @@ export const navigation = {
     // =========================
     // FOOTER
     // =========================
-    {
-      label: "Footer",
-      icon: Grid3X3,
-      dropdown: false,
-    },
+{
+  label: "Footer",
+  icon: Grid3X3,
+  dropdown: true,
+  children: [
+    { label: "Footer-kolom" },
+    { label: "Footer-Social-media" },
+  ],
+},
 
     // =========================
     // PENGATURAN PENGGUNA

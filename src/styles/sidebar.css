@@ -266,3 +266,10 @@
 .sidebar-item.active span {
   font-weight: 800;
 }
+
+/* KHUSUS PENGATURAN PENGGUNA */
+.sidebar-item.active-user-settings {
+  background-color: rgba(253, 203, 1, 1);
+  color: #000;
+  border-radius: 6px;
+}

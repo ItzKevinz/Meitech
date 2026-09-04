@@ -35,6 +35,9 @@ import TopGeneralArtikel from "./pages/Top-general/TopGeneralArtikel";
 import TopProjek from "./pages/Top-general/TopProjek";
 import TopFAQ from "./pages/Top-general/TopFAQ";
 import TopCareer from "./pages/Top-general/TopCareer";
+import FooterKolom from "./pages/footer/FooterKolom";
+import FooterSocialMedia from "./pages/footer/FooterSocialMedia";
+import UserSettings from "./pages/UserSettings";
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -246,6 +249,15 @@ function App() {
       case "top-karir":
       case "top-career":
         return <TopCareer />;
+
+        case "footer-kolom":
+  return <FooterKolom />;
+
+  case "footer-social-media":
+  return <FooterSocialMedia />;
+
+  case "pengaturan-pengguna":
+  return <UserSettings />;
 
       case "dashboard":
       default:

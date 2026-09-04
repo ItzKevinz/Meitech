@@ -58,6 +58,10 @@ function SidebarItem({
       "Top-projek": "top-projek",
       "Top-FAQ": "top-faq",
       "Top-karir": "top-karir",
+
+      // Footer
+      "Footer-kolom": "footer-kolom",
+      "Footer-Social-media": "footer-social-media",
     };
 
     const page =
@@ -81,9 +85,15 @@ function SidebarItem({
   return (
     <div className="sidebar-item-wrapper">
       <button
-        className={`sidebar-item ${
-          level === 0 ? "sidebar-item-main" : "sidebar-item-child"
-        } ${activeMenu === item.label ? "active" : ""}`}
+className={`sidebar-item ${
+  level === 0 ? "sidebar-item-main" : "sidebar-item-child"
+} ${
+  item.label === "Pengaturan Pengguna" && activeMenu === item.label
+    ? "active-user-settings"
+    : activeMenu === item.label
+    ? "active"
+    : ""
+}`}
         style={{
           paddingLeft: `${
             level === 0 ? 4 : 28 + level * 12
