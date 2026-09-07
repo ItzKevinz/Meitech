@@ -26,7 +26,7 @@ const ProjectDetail = () => {
     }
   ]);
 
-  // State Form Input Projek 
+  // State Form Input Projek
   const [editingItemId, setEditingItemId] = useState(null);
   const [projectInput, setProjectInput] = useState({
     projectName: '',
@@ -318,7 +318,7 @@ const ProjectDetail = () => {
     <div className="bg-[#F8F4E9] min-h-screen p-6 md:p-10 font-sans w-full relative text-left">
       <div className="w-full flex flex-col gap-6">
 
-        {/* TAMPILAN 1:      */}
+        {/* TAMPILAN 1*/}
         {viewMode === 'list' && (
           <>
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm text-left w-full">
@@ -349,7 +349,7 @@ const ProjectDetail = () => {
                   <div className="w-[23%] text-center">Deskripsi</div>
                   <div className="w-[18%] text-center">Gambar</div>
                 </div>
-
+                 
                 <div className="divide-y divide-[#E0E0E0]">
                   {projects.map((item, index) => (
                     <div

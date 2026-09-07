@@ -4,7 +4,7 @@ import { Save, X, ArrowLeft, Upload } from "lucide-react";
 const CategorySetting = () => {
   const [viewMode, setViewMode] = useState("list");
 
-  // State Data Kategori Dummy
+  // State Data kategori
   const [categories, setCategories] = useState([
     {
       id: 1,
@@ -33,9 +33,25 @@ const CategorySetting = () => {
       ],
       image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&q=80",
     },
+        {
+      id: 3,
+      name: "Sheet Metal",
+      name_en: "Sheet Metal",
+      description:
+        "Fabrikasi presisi tinggi untuk pembuatan Racking, Bannister, Partisi, Kanopi, Pagar, HVAC, dan Ducting berkualitas industri menggunakan teknologi laser cutting terbaru.",
+      description_en:
+        "High-precision fabrication for Racking, Bannister, Partitions, Canopies, Fences, HVAC, and Ducting using laser cutting technology.",
+      productTypes: [
+        "Pagar & Kanopi",
+        "Racking",
+        "Laser Cutting",
+        "HVAC & Ducting",
+      ],
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&q=80",
+    },
+
   ]);
 
-  // State Form Input
   const [editingId, setEditingId] = useState(null);
   const [categoryInput, setCategoryInput] = useState({
     name: "",
@@ -46,7 +62,7 @@ const CategorySetting = () => {
     imageFile: null,
   });
   
-  // State untuk input temporary penambahan Jenis Produk (Tag)
+  // State untuk input temporary penambahan Jenis Produk
   const [newTypeInput, setNewTypeInput] = useState("");
   const [showTypeInput, setShowTypeInput] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);

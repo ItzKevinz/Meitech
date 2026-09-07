@@ -107,7 +107,7 @@ const TopProjek = () => {
             </div>
           </div>
 
-          {/* LABEL DALAM BAHASA INGGRIS (Ngikut warna & opacity dari Label Indo) */}
+          {/* LABEL DALAM BAHASA INGGRIS*/}
           <div className="mb-4">
             <label className="mb-1.5 block text-[10px] font-bold italic text-[#555]">
               LABEL DALAM BAHASA INGGRIS
@@ -163,7 +163,7 @@ const TopProjek = () => {
             </div>
           </div>
 
-          {/* JUDUL DALAM BAHASA INGGRIS (Ngikut warna & opacity dari Judul Indo) */}
+          {/* JUDUL DALAM BAHASA INGGRIS*/}
           <div className="mb-4">
             <label className="mb-1.5 block text-[10px] font-bold italic text-[#555]">
               JUDUL DALAM BAHASA INGGRIS
@@ -219,7 +219,7 @@ const TopProjek = () => {
             </div>
           </div>
 
-          {/* DESKRIPSI DALAM BAHASA INGGRIS (Ngikut warna & opacity dari Deskripsi Indo) */}
+          {/* DESKRIPSI DALAM BAHASA INGGRIS */}
           <div className="mb-5">
             <label className="mb-1.5 block text-[10px] font-bold italic text-[#555]">
               DESKRIPSI DALAM BAHASA INGGRIS

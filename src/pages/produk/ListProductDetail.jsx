@@ -2,13 +2,12 @@ import { useState, useRef } from "react";
 import { X, ArrowLeft, Save, Upload } from "lucide-react";
 
 const ListProductDetail = () => {
-  // State List Data Produk
   const [products, setProducts] = useState([
     {
       id: 1,
       nama: "LVMDP",
       katalog: "Panel Marker",
-      label: "Main Distributor",
+      label: "Main Distribution",
       deskripsi:
         "Low Voltage Main Distribution Panel sebagai pusat pendistribusian arus utama dari trafo/genset ke seluruh jaringan...",
       deskripsi_en: "",
@@ -19,9 +18,6 @@ const ListProductDetail = () => {
       ],
       images: [
         { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
-        { id: 2, name: "gambar1.png", url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&q=80" },
-        { id: 3, name: "gambar2.png", url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&q=80" },
-        { id: 4, name: "gambar3.png", url: "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=500&q=80" },
       ],
     },
     {
@@ -36,6 +32,108 @@ const ListProductDetail = () => {
         "Rating Arus: 100A hingga 630A",
         "Sistem Proteksi: MCCB & MCB",
         "Monitoring: Digital Metering",
+      ],
+      images: [
+        { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+      ],
+    },
+    {
+      id: 3,
+      nama: "MCC (Motor Contol Center)",
+      katalog: "Panel Marker",
+      label: "Monitor Controling",
+      deskripsi:
+        "Panel pengontrolan dan pengoperasian mesin/motor listrik industri yang terintegrasi dengan proteksi overload dan",
+      deskripsi_en: "",
+      spesifikasi: [
+        "System: DOL, Star-Delta, VFD",
+        "Otomasi: PLC Integration Ready",
+        "Monitoring: Digital Metering",
+      ],
+      images: [
+        { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+      ],
+    },
+    {
+      id: 4,
+      nama: "Panel Enclosure",
+      katalog: "Panel Marker",
+      label: "Sheet Metal Box",
+      deskripsi:
+        "Box panel kustom untuk perakitan indoor maupun outdoor dengan ketahanan cuaca tinggi, hasil presisi mesin CNC...",
+      deskripsi_en: "",
+      spesifikasi: [
+        "Material: SPHC / Stainless 304",
+        "Protection: IP55 to IP66 Rating",
+        "Lock: Heavy Duty Industrial",
+      ],
+      images: [
+        { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+      ],
+    },
+    {
+      id: 5,
+      nama: "ATS/AMF Panel",
+      katalog: "Panel Marker",
+      label: "Automatic Switching",
+      deskripsi:
+        "Sistem pemindah daya otomatis dari sumber PLN ke Genset saat terjadi gangguan listrik untuk menjamin",
+      deskripsi_en: "",
+      spesifikasi: [
+        "Interlock: Motorized Breaker",
+        "Protection: IP55 to IP66 Rating",
+        "Auto Start/Stop Genset Module",
+      ],
+      images: [
+        { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+      ],
+    },
+    {
+      id: 6,
+      nama: "Capasitor Bank",
+      katalog: "Panel Marker",
+      label: "Autpmatic Switching",
+      deskripsi:
+        "Sistem pemindah daya otomatis dari sumber PLN ke Genset saat terjadi gangguan listrik untuk menjamin...",
+      deskripsi_en: "",
+      spesifikasi: [
+        "Interlock: Motorized Breaker",
+        "Protection: IP55 to IP66 Rating",
+        "Auto Start/Stop Genset Module",
+      ],
+      images: [
+        { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+      ],
+    },
+    {
+      id: 7,
+      nama: "Raking Storage",
+      katalog: "Sheet Metal",
+      label: "Individual Storage",
+      deskripsi:
+        "Rak penyimpanan heavy-duty & medium-duty untuk pergudangan, ruang server, serta penataan barang industri.",
+      deskripsi_en: "",
+      spesifikasi: [
+        "kapasitas Beban tinggi",
+        "Finishing Powder Coating",
+        "Design Modular/ knocdown",
+      ],
+      images: [
+        { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+      ],
+    },
+    {
+      id: 8,
+      nama: "Kanopi",
+      katalog: "Sheet Metal",
+      label: "Custom Cashing",
+      deskripsi:
+        "Wadah dan boks proteksi logam presisi untuk pengemasan komponen mesin, alat berat, maupun barang sensitif.",
+      deskripsi_en: "",
+      spesifikasi: [
+        "Tahab benturan keras",
+        "Presisi pemotongan Laser CNC",
+        "Opsi material mild/ Stainless",
       ],
       images: [
         { id: 1, name: "gambar.png", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
@@ -68,28 +166,22 @@ const ListProductDetail = () => {
     images: [],
   });
 
-  // State Preview Gambar Upload untuk Form Tambah
   const [addImagesPreview, setAddImagesPreview] = useState([]);
-
-  // Temporary State untuk Tag Spesifikasi Baru
   const [newSpecInput, setNewSpecInput] = useState("");
   const [showSpecInput, setShowSpecInput] = useState(false);
 
-  // State Modal Hapus & Simpan
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
 
   const fileInputRef = useRef(null);
 
-  // Handler Buka Detail
   const handleOpenDetail = (item) => {
     setSelectedProduct(item);
     setSelectedImageIndex(0);
     setViewMode("detail");
   };
 
-  // Handler Buka Form Tambah
   const handleOpenAdd = () => {
     setProductForm({
       id: null,
@@ -105,7 +197,6 @@ const ListProductDetail = () => {
     setViewMode("add");
   };
 
-  // Handler Buka Form Edit
   const handleOpenEdit = (item) => {
     setSelectedProduct(item);
     setProductForm({
@@ -122,13 +213,11 @@ const ListProductDetail = () => {
     setViewMode("edit");
   };
 
-  // Handler Input Change Form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProductForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handler Hapus Tag Spesifikasi
   const handleRemoveSpec = (indexToRemove) => {
     setProductForm((prev) => ({
       ...prev,
@@ -136,7 +225,6 @@ const ListProductDetail = () => {
     }));
   };
 
-  // Handler Tambah Tag Spesifikasi
   const handleAddSpec = () => {
     if (newSpecInput.trim()) {
       setProductForm((prev) => ({
@@ -148,7 +236,6 @@ const ListProductDetail = () => {
     }
   };
 
-  // Handler Hapus Gambar (Edit Mode)
   const handleRemoveImage = (imgIdToRemove) => {
     setProductForm((prev) => {
       const updatedImages = prev.images.filter((img) => img.id !== imgIdToRemove);
@@ -159,7 +246,6 @@ const ListProductDetail = () => {
     }
   };
 
-  // Handler Upload Gambar Baru
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length > 0) {
@@ -180,7 +266,6 @@ const ListProductDetail = () => {
     }
   };
 
-  // Handler Drop File
   const handleDrop = (e) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
@@ -202,7 +287,6 @@ const ListProductDetail = () => {
     }
   };
 
-  // Handler Submit Form
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!productForm.nama.trim()) {
@@ -212,7 +296,6 @@ const ListProductDetail = () => {
     setShowSaveModal(true);
   };
 
-  // Handler Konfirmasi Simpan
   const handleConfirmSave = () => {
     if (viewMode === "add") {
       const newProduct = {
@@ -240,7 +323,6 @@ const ListProductDetail = () => {
     setViewMode("list");
   };
 
-  // Hapus Data Produk 
   const handleOpenDeleteModal = (id) => {
     setDeletingId(id);
     setShowDeleteModal(true);
@@ -285,7 +367,7 @@ const ListProductDetail = () => {
                   <div className="w-[4%] text-left">No.</div>
                   <div className="w-[14%] text-left">Nama</div>
                   <div className="w-[12%] text-left">Katalog</div>
-                  <div className="w-[14%] text-left">Label</div>
+                  <div className="w-[14%] text-left">label</div>
                   <div className="w-[28%] text-left px-2">Deskripsi Produk</div>
                   <div className="w-[20%] text-left px-2">Spesifikasi</div>
                   <div className="w-[8%] text-center">Aksi</div>
@@ -356,7 +438,7 @@ const ListProductDetail = () => {
           </>
         )}
 
-        {/* TAMPILAN 2: DETAIL PRODUK                  */}
+        {/* TAMPILAN 2: DETAIL PRODUK */}
         {viewMode === "detail" && selectedProduct && (
           <div className="w-full flex flex-col gap-6">
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-xs flex items-center gap-4 w-full">
@@ -517,7 +599,6 @@ const ListProductDetail = () => {
                   className="hidden"
                 />
 
-                {/* NAMA PRODUK */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase">
                     NAMA PRODUK
@@ -533,7 +614,6 @@ const ListProductDetail = () => {
                   />
                 </div>
 
-                {/* DESKRIPSI */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase">
                     DESKRIPSI
@@ -548,7 +628,6 @@ const ListProductDetail = () => {
                   />
                 </div>
 
-                {/* DESKRIPSI BAHASA INGGRIS */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase italic">
                     DESKRIPSI DALAM BAHASA INGGRIS
@@ -563,7 +642,6 @@ const ListProductDetail = () => {
                   />
                 </div>
 
-                {/* LABEL */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase">
                     LABEL
@@ -578,7 +656,6 @@ const ListProductDetail = () => {
                   />
                 </div>
 
-                {/* KATEGORI PRODUK (SELECT) */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase">
                     KATEGORI PRODUK
@@ -603,7 +680,6 @@ const ListProductDetail = () => {
                   </div>
                 </div>
 
-                {/* SPESIFIKASI */}
                 <div className="flex flex-col items-start gap-2.5 w-full">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase">
                     SPESIFIKASI
@@ -662,13 +738,11 @@ const ListProductDetail = () => {
                   </div>
                 </div>
 
-                {/* GAMBAR PRODUK */}
                 <div className="flex flex-col items-start gap-3 w-full mt-2">
                   <label className="text-[11px] font-extrabold tracking-wider text-[#3D4947] uppercase">
                     GAMBAR PRODUK
                   </label>
 
-                  {/* FORM TAMBAH: BOKS DROPZONE SAMA DENGAN TAMBAH KATEGORI */}
                   {viewMode === "add" && addImagesPreview.length === 0 ? (
                     <div
                       onClick={() => fileInputRef.current?.click()}
@@ -687,7 +761,6 @@ const ListProductDetail = () => {
                       </div>
                     </div>
                   ) : (
-                    /* FORM EDIT ATAU TAMBAH (SELESAI UPLOAD) */
                     <div className="w-full bg-white border border-[#D5D5D5] rounded-xl p-6 flex flex-col md:flex-row items-start justify-between gap-8">
                       <div className="w-[180px] h-[240px] border-2 border-dashed border-[#C5C5C5] rounded-xl flex items-center justify-center p-3 bg-white">
                         {(viewMode === "add" ? addImagesPreview : productForm.images).length > 0 ? (
@@ -752,7 +825,6 @@ const ListProductDetail = () => {
                   )}
                 </div>
 
-                {/* TOMBOL SIMPAN */}
                 <div className="flex justify-start mt-4">
                   <button
                     type="submit"

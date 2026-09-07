@@ -49,6 +49,14 @@ function SidebarItem({
       "Lokasi": "lokasi-settings",
       "Lokasi-Settings": "lokasi-settings",
 
+      // Kontak
+      "Kontak Settings": "kontak-settings",
+      "Kontak-Settings": "kontak-settings",
+      "kontak-settings": "kontak-settings",
+      "Pesan Masuk": "pesan-masuk",
+      "Pesan-Masuk": "pesan-masuk",
+      "pesan-masuk": "pesan-masuk",
+
       // Top General
       "Top-beranda": "top-beranda",
       "Top-tentang kami": "top-tentang-kami",

@@ -27,6 +27,7 @@ import Location from "./pages/Location";
 import Career from "./pages/Career";
 import CategorySetting from "./pages/produk/CategorySetting";
 import ListProductDetail from "./pages/produk/ListProductDetail";
+import ContactSettings from "./pages/kontak/ContactSettings";
 import TopBeranda from "./pages/Top-general/TopBeranda";
 import TopTentangKami from "./pages/Top-general/TopTentangKami";
 import TopKatalogProduk from "./pages/Top-general/TopKatalogProduk";
@@ -38,6 +39,8 @@ import TopCareer from "./pages/Top-general/TopCareer";
 import FooterKolom from "./pages/footer/FooterKolom";
 import FooterSocialMedia from "./pages/footer/FooterSocialMedia";
 import UserSettings from "./pages/UserSettings";
+import IncomingMessages from "./pages/kontak/IncomingMessages";
+
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -187,7 +190,6 @@ function App() {
           />
         );
 
-      // ROUTE PRODUK & KATEGORI
       case "produk-kategori":
       case "kategori-setting":
       case "kategori":
@@ -197,6 +199,17 @@ function App() {
       case "list-product":
       case "produk-detail":
         return <ListProductDetail />;
+
+      
+      case "kontak-settings":
+      case "kontak":
+        return <ContactSettings />;
+
+      case "pesan-masuk":
+      case "kontak-masuk":
+        return (
+          <IncomingMessages />
+        );
 
       case "faq-kategori":
         return (

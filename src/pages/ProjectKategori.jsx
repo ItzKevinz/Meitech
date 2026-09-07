@@ -33,6 +33,26 @@ const ProjectKategori = () => {
       description: 'Sistem Rak Logam Pergudangan Logistik PT Global Logistik Indonesia.',
       description_en: 'Sistem Rak Logam Pergudangan Logistik PT Global Logistik Indonesia.',
       image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&q=80'
+    },
+    {
+      id: 3,
+      type: 'Capacitor Bank Panel',
+      year: '2024',
+      location: 'Karawang, Jawa Barat',
+      category: 'Pemasangan Panel Perbaikan Faktor Daya Industri PT Mega Sinar Industri.',
+      description: 'Pemasangan Panel Perbaikan Faktor Daya Industri PT Mega Sinar Industri.',
+      description_en: 'Pemasangan Panel Perbaikan Faktor Daya Industri PT Mega Sinar Industri.',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&q=80'
+    },
+    {
+      id: 4,
+      type: 'Custom Cantilever Rack',
+      year: '2023',
+      location: 'Tangerang, Banten',
+      category: 'Penyediaan Sistem Penyimpanan Batangan Pipa PT Baja Perkasa Utama.',
+      description: 'Penyediaan Sistem Penyimpanan Batangan Pipa PT Baja Perkasa Utama.',
+      description_en: 'Penyediaan Sistem Penyimpanan Batangan Pipa PT Baja Perkasa Utama.',
+      image: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?w=500&q=80'
     }
   ]);
 
@@ -185,7 +205,7 @@ const ProjectKategori = () => {
     <div className="bg-[#F8F4E9] min-h-screen p-6 md:p-10 font-sans w-full relative text-left">
       <div className="w-full flex flex-col gap-6">
         
-        {/* TAMPILAN 1: */}
+        {/* TAMPILAN 1: LIST PORTOFOLIO */}
         {viewMode === 'list' && (
           <>
             {/* Header Title 'Projek-Portofolio' */}
@@ -261,7 +281,7 @@ const ProjectKategori = () => {
                   />
                 </div>
 
-                {/* Tambah  Portofolio */}
+                {/* Tambah Portofolio */}
                 <div className="flex justify-start mt-2">
                   <button
                     type="button"
@@ -272,7 +292,7 @@ const ProjectKategori = () => {
                   </button>
                 </div>
 
-                {/* TAMPILAN PORTOFOLIO  */}
+                {/* TAMPILAN PORTOFOLIO */}
                 <div className="border border-[#D1D5DB] rounded-2xl overflow-hidden bg-white w-full shadow-xs mt-2">
                   
                   {/* HEADER FLEX */}
@@ -287,7 +307,7 @@ const ProjectKategori = () => {
                     <div className="w-[10%] text-center">Aksi</div>
                   </div>
 
-                  {/* ITEM BARIS FLEX */}
+                  {/* ITEM BARIS FLEX (4 DATA) */}
                   <div className="divide-y divide-[#E0E0E0]">
                     {projects.map((item, index) => (
                       <div
@@ -373,11 +393,11 @@ const ProjectKategori = () => {
           </>
         )}
 
-        {/* TAMPILAN 2*/}
+        {/* TAMPILAN 2: FORM TAMBAH EDIT */}
         {viewMode === 'form' && (
           <div className="w-full flex flex-col gap-6">
             
-            {/* Header Title dengan Panah Kembali */}
+            {/* Header Title */}
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm flex items-center gap-4 w-full">
               <button
                 type="button"
@@ -543,6 +563,7 @@ const ProjectKategori = () => {
 
       </div>
 
+      {/* hapus */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-[580px] overflow-hidden text-left animate-in fade-in zoom-in-95 duration-150">
