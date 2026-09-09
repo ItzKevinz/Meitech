@@ -1,10 +1,9 @@
 import { useState, useRef } from 'react';
-import { X, ArrowLeft, Upload, Edit, Trash2 } from 'lucide-react';
+import { X, ArrowLeft, Upload } from 'lucide-react';
 
 const ProjectDetail = () => {
   const [viewMode, setViewMode] = useState('list');
 
-  // State Daftar Item Projek Detail
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -70,21 +69,28 @@ const ProjectDetail = () => {
       { parameter: '', detail: '' }
     ],
 
-    // State Upload Gambar
-    thumbnailPreview: null,
-    tantanganPreview: null,
-    galleryBoxPreview: null, 
+    // State Upload Gambar Single (Object dengan name & url)
+    thumbnailFile: {
+      name: 'thumbnail.png',
+      url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80'
+    },
+    tantanganFile: {
+      name: 'tantangan.png',
+      url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80'
+    },
 
-    // image kanan
+    // Image Galeri Portofolio (Multiple)
     galleryFiles: [
-      { id: 1, name: 'gambar.png' },
-      { id: 2, name: 'gambar1.png' },
-      { id: 3, name: 'gambar2.png' },
-      { id: 4, name: 'gambar3.png' }
+      { id: 1, name: 'gambar.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' },
+      { id: 2, name: 'gambar1.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' },
+      { id: 3, name: 'gambar2.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' },
+      { id: 4, name: 'gambar3.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' }
     ]
   });
 
-  // Ref File Upload Interaktif
+  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
+
+  // Ref File Upload
   const thumbnailInputRef = useRef(null);
   const tantanganInputRef = useRef(null);
   const galleryInputRef = useRef(null);
@@ -93,13 +99,13 @@ const ProjectDetail = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingItemId, setDeletingItemId] = useState(null);
 
-  // Handler Input 
+  // Handler Input Text
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProjectInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handler Tabel Tantangan 
+  // Handler Tabel Tantangan ID
   const handleTantanganChange = (index, colKey, value) => {
     setProjectInput((prev) => {
       const updated = [...prev.tantanganList];
@@ -115,7 +121,7 @@ const ProjectDetail = () => {
     }));
   };
 
-  // Handler Tabel Tantangan
+  // Handler Tabel Tantangan EN
   const handleTantanganEnChange = (index, colKey, value) => {
     setProjectInput((prev) => {
       const updated = [...prev.tantanganEnList];
@@ -149,21 +155,57 @@ const ProjectDetail = () => {
     }));
   };
 
-  // Handler Upload Gambar Single
+  // Handler Upload Gambar Single (Thumbnail & Tantangan)
   const handleSingleImageUpload = (e, targetKey) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
+      const fileData = {
+        name: file.name,
+        url: URL.createObjectURL(file)
+      };
       setProjectInput((prev) => ({
         ...prev,
-        [targetKey]: imageUrl
+        [targetKey]: fileData
       }));
+    }
+  };
+
+  // Handler Multi-Upload Galeri Portofolio
+  const handleGalleryUpload = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+      const newImages = files.map((file, idx) => ({
+        id: Date.now() + idx,
+        name: file.name,
+        url: URL.createObjectURL(file)
+      }));
+
+      setProjectInput((prev) => ({
+        ...prev,
+        galleryFiles: [...prev.galleryFiles, ...newImages]
+      }));
+    }
+  };
+
+  // Handler Hapus Gambar Galeri
+  const handleRemoveGalleryImage = (idToRemove) => {
+    setProjectInput((prev) => {
+      const updatedFiles = prev.galleryFiles.filter((item) => item.id !== idToRemove);
+      return {
+        ...prev,
+        galleryFiles: updatedFiles
+      };
+    });
+
+    if (selectedGalleryIndex >= projectInput.galleryFiles.length - 1) {
+      setSelectedGalleryIndex(Math.max(0, projectInput.galleryFiles.length - 2));
     }
   };
 
   // Handler Buka Form Tambah
   const handleOpenAddForm = () => {
     setEditingItemId(null);
+    setSelectedGalleryIndex(0);
     setProjectInput({
       projectName: '',
       projectNameEn: '',
@@ -176,35 +218,13 @@ const ProjectDetail = () => {
       sektorIndustri: '',
       sistemUtama: '',
       quotesText: '',
-      tantanganList: [
-        { left: '', right: '' },
-        { left: '', right: '' },
-        { left: '', right: '' }
-      ],
-      tantanganEnList: [
-        { left: '', right: '' },
-        { left: '', right: '' },
-        { left: '', right: '' }
-      ],
-      spesifikasiList: [
-        { parameter: '', detail: '' },
-        { parameter: '', detail: '' },
-        { parameter: '', detail: '' }
-      ],
-      spesifikasiEnList: [
-        { parameter: '', detail: '' },
-        { parameter: '', detail: '' },
-        { parameter: '', detail: '' }
-      ],
-      thumbnailPreview: null,
-      tantanganPreview: null,
-      galleryBoxPreview: null,
-      galleryFiles: [
-        { id: 1, name: 'gambar.png' },
-        { id: 2, name: 'gambar1.png' },
-        { id: 3, name: 'gambar2.png' },
-        { id: 4, name: 'gambar3.png' }
-      ]
+      tantanganList: [{ left: '', right: '' }, { left: '', right: '' }, { left: '', right: '' }],
+      tantanganEnList: [{ left: '', right: '' }, { left: '', right: '' }, { left: '', right: '' }],
+      spesifikasiList: [{ parameter: '', detail: '' }, { parameter: '', detail: '' }, { parameter: '', detail: '' }],
+      spesifikasiEnList: [{ parameter: '', detail: '' }, { parameter: '', detail: '' }, { parameter: '', detail: '' }],
+      thumbnailFile: null,
+      tantanganFile: null,
+      galleryFiles: []
     });
     setViewMode('form');
   };
@@ -212,6 +232,7 @@ const ProjectDetail = () => {
   // Handler Buka Form Edit
   const handleOpenEditForm = (item) => {
     setEditingItemId(item.id);
+    setSelectedGalleryIndex(0);
     setProjectInput({
       projectName: item.projectName || item.type || '',
       projectNameEn: item.projectNameEn || '',
@@ -224,16 +245,8 @@ const ProjectDetail = () => {
       sektorIndustri: item.sektorIndustri || '',
       sistemUtama: item.sistemUtama || '',
       quotesText: item.quotesText || '',
-      tantanganList: [
-        { left: '', right: '' },
-        { left: '', right: '' },
-        { left: '', right: '' }
-      ],
-      tantanganEnList: [
-        { left: '', right: '' },
-        { left: '', right: '' },
-        { left: '', right: '' }
-      ],
+      tantanganList: [{ left: '', right: '' }, { left: '', right: '' }, { left: '', right: '' }],
+      tantanganEnList: [{ left: '', right: '' }, { left: '', right: '' }, { left: '', right: '' }],
       spesifikasiList: [
         { parameter: 'Amphere rate', detail: '2500A' },
         { parameter: 'Tegangan Operasional', detail: '400v/3 Phase/ 30Hz' },
@@ -242,19 +255,14 @@ const ProjectDetail = () => {
         { parameter: 'Material Enclosure', detail: 'Cold Rolled Steel 2.0mm, Powder Coated Yellow RAL 1021' },
         { parameter: 'Busbar System', detail: 'Electrolytic Copper Busbar (Tinned)' }
       ],
-      spesifikasiEnList: [
-        { parameter: '', detail: '' },
-        { parameter: '', detail: '' },
-        { parameter: '', detail: '' }
-      ],
-      thumbnailPreview: item.image || null,
-      tantanganPreview: null,
-      galleryBoxPreview: null,
+      spesifikasiEnList: [{ parameter: '', detail: '' }, { parameter: '', detail: '' }, { parameter: '', detail: '' }],
+      thumbnailFile: item.image ? { name: 'thumbnail.png', url: item.image } : null,
+      tantanganFile: item.image ? { name: 'tantangan.png', url: item.image } : null,
       galleryFiles: [
-        { id: 1, name: 'gambar.png' },
-        { id: 2, name: 'gambar1.png' },
-        { id: 3, name: 'gambar2.png' },
-        { id: 4, name: 'gambar3.png' }
+        { id: 1, name: 'gambar.png', url: item.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' },
+        { id: 2, name: 'gambar1.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' },
+        { id: 3, name: 'gambar2.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' },
+        { id: 4, name: 'gambar3.png', url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80' }
       ]
     });
     setViewMode('form');
@@ -276,7 +284,7 @@ const ProjectDetail = () => {
                 ...item,
                 ...projectInput,
                 type: projectInput.projectName,
-                image: projectInput.thumbnailPreview || item.image
+                image: projectInput.thumbnailFile?.url || item.image
               }
             : item
         )
@@ -288,7 +296,7 @@ const ProjectDetail = () => {
         type: projectInput.projectName,
         year: new Date().getFullYear().toString(),
         category: projectInput.sektorIndustri || 'General',
-        image: projectInput.thumbnailPreview || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80'
+        image: projectInput.thumbnailFile?.url || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80'
       };
       setProjects((prev) => [...prev, newItem]);
     }
@@ -318,7 +326,7 @@ const ProjectDetail = () => {
     <div className="bg-[#F8F4E9] min-h-screen p-6 md:p-10 font-sans w-full relative text-left">
       <div className="w-full flex flex-col gap-6">
 
-        {/* TAMPILAN 1*/}
+        {/* TAMPILAN 1: LIST TABLE */}
         {viewMode === 'list' && (
           <>
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm text-left w-full">
@@ -349,7 +357,7 @@ const ProjectDetail = () => {
                   <div className="w-[23%] text-center">Deskripsi</div>
                   <div className="w-[18%] text-center">Gambar</div>
                 </div>
-                 
+                  
                 <div className="divide-y divide-[#E0E0E0]">
                   {projects.map((item, index) => (
                     <div
@@ -417,7 +425,7 @@ const ProjectDetail = () => {
           </>
         )}
 
-        {/* TAMPILAN 2*/}
+        {/* TAMPILAN 2: FORM EDIT / TAMBAH */}
         {viewMode === 'form' && (
           <div className="w-full flex flex-col gap-6">
             
@@ -455,7 +463,7 @@ const ProjectDetail = () => {
                   />
                 </div>
 
-                {/* 2. NAMA PROJECT  INGGRIS */}
+                {/* 2. NAMA PROJECT INGGRIS */}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-xs font-bold leading-4 tracking-[0.6px] text-[#555555] uppercase">
                     NAMA PROJECT DALAM BAHASA INGGRIS
@@ -483,7 +491,7 @@ const ProjectDetail = () => {
                   />
                 </div>
 
-                {/* 4. DESKRIPSI */}
+                {/* 4.DESKRIPSI*/}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-xs font-bold leading-4 tracking-[0.6px] text-[#555555] uppercase">
                     DESKRIPSI
@@ -673,7 +681,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                {/* 11. TABEL TANTANGAN DAN SOLUSI DALAM BAHASA INGGRIS */}
+                {/* 11. TABEL TANTANGAN DAN SOLUSI EN */}
                 <div className="flex flex-col items-start gap-2 w-full mt-2">
                   <label className="text-xs font-bold text-[#555555]">
                     Tantangan dan solusi dalam bahasa inggris
@@ -778,182 +786,147 @@ const ProjectDetail = () => {
                 </div>
 
                 {/* 14. PROJEK THUMBNAIL */}
-                <div className="flex flex-col items-start gap-2 w-full mt-2">
-                  <label className="text-xs font-bold text-[#555555] uppercase">
+                <div className="flex flex-col items-start gap-2 w-full mt-2 text-left">
+                  <label className="text-xs font-bold text-[#555555] uppercase tracking-wider">
                     PROJEK THUMBNAIL
                   </label>
                   
                   <input
                     type="file"
                     ref={thumbnailInputRef}
-                    onChange={(e) => handleSingleImageUpload(e, 'thumbnailPreview')}
+                    onChange={(e) => handleSingleImageUpload(e, 'thumbnailFile')}
                     className="hidden"
                     accept="image/*"
                   />
 
-                  <div
-                    onClick={() => thumbnailInputRef.current?.click()}
-                    className="w-[380px] h-48 border-2 border-dashed border-[#B0B0B0] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors bg-white relative overflow-hidden group"
-                  >
-                    {projectInput.thumbnailPreview ? (
+                  <div className="flex items-start gap-6">
+                    {projectInput.thumbnailFile ? (
                       <>
-                        <img
-                          src={projectInput.thumbnailPreview}
-                          alt="Thumbnail"
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              thumbnailInputRef.current?.click();
-                            }}
-                            className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer border-none"
-                          >
-                            <Edit size={14} /> Ganti
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setProjectInput((prev) => ({ ...prev, thumbnailPreview: null }));
-                            }}
-                            className="bg-[#FF0000] hover:bg-[#cc0000] text-white font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer border-none"
-                          >
-                            <Trash2 size={14} /> Hapus
-                          </button>
+                        <div className="w-[380px] h-[200px] rounded-xl overflow-hidden border border-gray-200 shadow-xs bg-black flex-shrink-0">
+                          <img
+                            src={projectInput.thumbnailFile.url}
+                            alt="Thumbnail"
+                            className="w-full h-full object-cover"
+                          />
                         </div>
+                        <button
+                          type="button"
+                          onClick={() => thumbnailInputRef.current?.click()}
+                          className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-bold text-sm px-8 py-2.5 rounded-lg border-none cursor-pointer transition-all shadow-2xs mt-2"
+                        >
+                          Edit
+                        </button>
                       </>
                     ) : (
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="border border-gray-300 rounded-lg px-6 py-2 flex items-center gap-2 bg-white shadow-2xs">
-                          <Upload size={16} className="text-black" />
-                          <span className="text-xs font-semibold text-black">Upload</span>
+                      <div
+                        onClick={() => thumbnailInputRef.current?.click()}
+                        className="w-[380px] h-[200px] border-2 border-dashed border-[#B0B0B0] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors bg-white"
+                      >
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="border border-gray-300 rounded-lg px-6 py-2 flex items-center gap-2 bg-white shadow-2xs">
+                            <Upload size={16} className="text-black" />
+                            <span className="text-xs font-semibold text-black">Upload</span>
+                          </div>
+                          <span className="text-[11px] text-gray-400 italic mt-1">
+                            Click atau drop gambar
+                          </span>
                         </div>
-                        <span className="text-[11px] text-gray-400 italic mt-1">
-                          Click atau drop gambar
-                        </span>
                       </div>
                     )}
                   </div>
                 </div>
 
                 {/* 15. GAMBAR TANTANGAN DAN SOLUSI */}
-                <div className="flex flex-col items-start gap-2 w-full mt-2">
-                  <label className="text-xs font-bold text-[#555555] uppercase">
+                <div className="flex flex-col items-start gap-2 w-full mt-4 text-left">
+                  <label className="text-xs font-bold text-[#555555] uppercase tracking-wider">
                     GAMBAR TANTANGAN DAN SOLUSI
                   </label>
 
                   <input
                     type="file"
                     ref={tantanganInputRef}
-                    onChange={(e) => handleSingleImageUpload(e, 'tantanganPreview')}
+                    onChange={(e) => handleSingleImageUpload(e, 'tantanganFile')}
                     className="hidden"
                     accept="image/*"
                   />
 
-                  <div
-                    onClick={() => tantanganInputRef.current?.click()}
-                    className="w-[380px] h-48 border-2 border-dashed border-[#B0B0B0] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors bg-white relative overflow-hidden group"
-                  >
-                    {projectInput.tantanganPreview ? (
+                  <div className="flex items-start gap-6">
+                    {projectInput.tantanganFile ? (
                       <>
-                        <img
-                          src={projectInput.tantanganPreview}
-                          alt="Tantangan"
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              tantanganInputRef.current?.click();
-                            }}
-                            className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer border-none"
-                          >
-                            <Edit size={14} /> Ganti
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setProjectInput((prev) => ({ ...prev, tantanganPreview: null }));
-                            }}
-                            className="bg-[#FF0000] hover:bg-[#cc0000] text-white font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer border-none"
-                          >
-                            <Trash2 size={14} /> Hapus
-                          </button>
+                        <div className="w-[380px] h-[200px] rounded-xl overflow-hidden border border-gray-200 shadow-xs bg-black flex-shrink-0">
+                          <img
+                            src={projectInput.tantanganFile.url}
+                            alt="Tantangan"
+                            className="w-full h-full object-cover"
+                          />
                         </div>
+                        <button
+                          type="button"
+                          onClick={() => tantanganInputRef.current?.click()}
+                          className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-bold text-sm px-8 py-2.5 rounded-lg border-none cursor-pointer transition-all shadow-2xs mt-2"
+                        >
+                          Edit
+                        </button>
                       </>
                     ) : (
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="border border-gray-300 rounded-lg px-6 py-2 flex items-center gap-2 bg-white shadow-2xs">
-                          <Upload size={16} className="text-black" />
-                          <span className="text-xs font-semibold text-black">Upload</span>
+                      <div
+                        onClick={() => tantanganInputRef.current?.click()}
+                        className="w-[380px] h-[200px] border-2 border-dashed border-[#B0B0B0] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors bg-white"
+                      >
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="border border-gray-300 rounded-lg px-6 py-2 flex items-center gap-2 bg-white shadow-2xs">
+                            <Upload size={16} className="text-black" />
+                            <span className="text-xs font-semibold text-black">Upload</span>
+                          </div>
+                          <span className="text-[11px] text-gray-400 italic mt-1">
+                            Click atau drop gambar
+                          </span>
                         </div>
-                        <span className="text-[11px] text-gray-400 italic mt-1">
-                          Click atau drop gambar
-                        </span>
                       </div>
                     )}
                   </div>
                 </div>
 
                 {/* 16. GALERI PORTOFOLIO */}
-                <div className="flex flex-col items-start gap-2 w-full mt-2">
-                  <label className="text-xs font-bold text-[#555555] uppercase">
+                <div className="flex flex-col items-start gap-2 w-full mt-4 text-left">
+                  <label className="text-xs font-bold text-[#555555] uppercase tracking-wider">
                     GALERI PORTOFOLIO
                   </label>
-                  <div className="border border-[#D1D5DB] rounded-2xl p-6 bg-white w-full flex flex-col md:flex-row items-center gap-8">
+
+                  <div className="border border-[#D1D5DB] rounded-2xl p-6 bg-white w-full flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xs">
                     
-                    {/* Input file  */}
                     <input
                       type="file"
                       ref={galleryInputRef}
-                      onChange={(e) => handleSingleImageUpload(e, 'galleryBoxPreview')}
+                      onChange={handleGalleryUpload}
                       className="hidden"
                       accept="image/*"
+                      multiple
                     />
 
-                    {/* Box Upload Kiri */}
+                    {/* Box Preview / Upload Kiri */}
                     <div
                       onClick={() => galleryInputRef.current?.click()}
-                      className="w-[340px] h-44 border-2 border-dashed border-[#B0B0B0] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors bg-white relative overflow-hidden flex-shrink-0 group"
+                      className="w-[380px] h-[200px] rounded-xl overflow-hidden border border-gray-200 shadow-xs bg-black flex-shrink-0 cursor-pointer relative group"
                     >
-                      {projectInput.galleryBoxPreview ? (
+                      {projectInput.galleryFiles.length > 0 ? (
                         <>
                           <img
-                            src={projectInput.galleryBoxPreview}
-                            alt="Galeri Portofolio"
+                            src={
+                              projectInput.galleryFiles[selectedGalleryIndex]?.url ||
+                              projectInput.galleryFiles[0]?.url
+                            }
+                            alt="Galeri Preview"
                             className="w-full h-full object-cover"
                           />
-                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                galleryInputRef.current?.click();
-                              }}
-                              className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer border-none"
-                            >
-                              <Edit size={14} /> Ganti
-                            </button>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setProjectInput((prev) => ({ ...prev, galleryBoxPreview: null }));
-                              }}
-                              className="bg-[#FF0000] hover:bg-[#cc0000] text-white font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer border-none"
-                            >
-                              <Trash2 size={14} /> Hapus
-                            </button>
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span className="text-xs text-white bg-black/70 px-3 py-1.5 rounded-lg font-semibold">
+                              + Tambah Gambar
+                            </span>
                           </div>
                         </>
                       ) : (
-                        <div className="flex flex-col items-center gap-2">
+                        <div className="w-full h-full border-2 border-dashed border-[#B0B0B0] flex flex-col items-center justify-center bg-white">
                           <div className="border border-gray-300 rounded-lg px-6 py-2 flex items-center gap-2 bg-white shadow-2xs">
                             <Upload size={16} className="text-black" />
                             <span className="text-xs font-semibold text-black">Upload</span>
@@ -965,25 +938,42 @@ const ProjectDetail = () => {
                       )}
                     </div>
 
-                    {/* List File Terupload */}
-                    <div className="flex flex-col gap-3 w-full max-w-[420px]">
-                      {projectInput.galleryFiles.map((f) => (
-                        <div key={f.id} className="flex items-center gap-3 w-full">
-                          <div className="flex-1 border border-[#D1D5DB] rounded-lg py-2.5 px-4 text-xs font-normal text-[#333333] bg-white shadow-2xs flex items-center gap-2 overflow-hidden">
-                            <span className="bg-gray-100 text-[10px] font-bold px-1.5 py-0.5 rounded border border-gray-300 text-gray-600 flex-shrink-0">
-                              PNG
-                            </span>
-                            <span className="truncate">{f.name}</span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={(e) => e.preventDefault()}
-                            className="bg-[#FF0000] hover:bg-[#cc0000] text-white font-bold text-xs px-5 py-2.5 rounded-lg transition-all cursor-pointer border-none shadow-2xs flex-shrink-0 select-none"
-                          >
-                            Hapus
-                          </button>
+                    {/* List File Terupload Kanan */}
+                    <div className="flex flex-col gap-3 flex-1 w-full max-w-[500px]">
+                      {projectInput.galleryFiles.length > 0 ? (
+                        projectInput.galleryFiles.map((f, idx) => {
+                          const isSelected = selectedGalleryIndex === idx;
+                          return (
+                            <div key={f.id} className="flex items-center gap-4 w-full">
+                              <div
+                                onClick={() => setSelectedGalleryIndex(idx)}
+                                className={`flex-1 border rounded-lg py-2 px-4 text-xs font-medium cursor-pointer transition-all flex items-center gap-2.5 overflow-hidden shadow-2xs ${
+                                  isSelected
+                                    ? 'bg-amber-50 border-[#FFD600] text-black font-bold ring-1 ring-[#FFD600]'
+                                    : 'bg-white border-[#D1D5DB] text-[#333333] hover:bg-gray-50'
+                                }`}
+                              >
+                                <span className="bg-white border border-gray-300 text-gray-700 text-[9px] font-bold px-1.5 py-0.5 rounded flex-shrink-0 uppercase shadow-2xs">
+                                  PNG
+                                </span>
+                                <span className="truncate">{f.name}</span>
+                              </div>
+
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveGalleryImage(f.id)}
+                                className="bg-[#FF0000] hover:bg-[#cc0000] text-white font-bold text-xs px-6 py-2.5 rounded-lg transition-all cursor-pointer border-none shadow-2xs flex-shrink-0"
+                              >
+                                Hapus
+                              </button>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div className="text-xs text-gray-400 italic py-8 text-center border border-dashed border-gray-200 rounded-xl">
+                          Belum ada gambar di galeri. Klik box di sebelah kiri untuk menambah gambar.
                         </div>
-                      ))}
+                      )}
                     </div>
 
                   </div>
@@ -1007,7 +997,7 @@ const ProjectDetail = () => {
 
       </div>
 
-      {/* hpus*/}
+      {/* MODAL HAPUS */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-[580px] overflow-hidden text-left animate-in fade-in zoom-in-95 duration-150">
@@ -1037,7 +1027,6 @@ const ProjectDetail = () => {
                   className="bg-[#FDE047] hover:bg-[#facc15] text-[#111827] font-semibold text-sm px-6 py-2.5 rounded-lg border-none cursor-pointer"
                 >
                   Kembali
-
                 </button>
                 <button
                   type="button"

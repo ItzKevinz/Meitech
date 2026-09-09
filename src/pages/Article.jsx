@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Save, X, ChevronDown, ArrowLeft, Upload } from 'lucide-react';
+import { Save, X, ChevronDown, } from 'lucide-react';
 
 const Article = () => {
   const [viewMode, setViewMode] = useState('list');
@@ -136,19 +136,6 @@ const Article = () => {
     }
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      setArticleInput((prev) => ({ ...prev, imageFile: file }));
-      setArticleImagePreview(URL.createObjectURL(file));
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
   const handleSaveArticle = (e) => {
     e.preventDefault();
     if (!articleInput.title.trim()) {
@@ -204,19 +191,19 @@ const Article = () => {
     <div className="bg-[#F8F4E9] min-h-screen p-6 md:p-10 font-sans w-full relative text-left">
       <div className="w-full flex flex-col gap-6">
         
-        {/* TAMPILAN LIST (TABEL CSS FLEXBOX) */}
+        {/* TAMPILAN LIST*/}
         {viewMode === 'list' && (
           <>
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm text-left w-full">
               <h1 className="m-0 text-3xl font-bold text-black tracking-tight">Artikel</h1>
             </div>
 
-            <div className="bg-white rounded-xl p-8 shadow-sm text-left flex flex-col gap-7 w-full">
+            <div className="bg-white rounded-xl p-8 shadow-sm text-left flex flex-col gap-3 w-full">
               <h2 className="text-2xl font-semibold text-[#1A1A1A] m-0">Semua artikel</h2>
               <hr className="border-t border-[#EAEAEA] m-0" />
 
               <form onSubmit={handleMainSubmit} className="flex flex-col gap-7 w-full">
-                
+                  
                 <div className="flex justify-start mt-2">
                   <button
                     type="button"
@@ -227,7 +214,7 @@ const Article = () => {
                   </button>
                 </div>
 
-                {/* TABEL CUSTOM CSS (FLEXBOX) */}
+                {/* TABEL CUSTOM CSS*/}
                 <div className="border border-[#D1D5DB] rounded-2xl overflow-hidden bg-white w-full shadow-xs mt-2">
                   
                   {/* HEADER FLEX */}
@@ -252,7 +239,7 @@ const Article = () => {
                           {index + 1}.
                         </div>
 
-                        {/* Judul (Rata Tengah) */}
+                        {/* Judul*/}
                         <div className="w-[34%] text-center font-normal px-2 leading-relaxed text-sm">
                           <div className="line-clamp-2">
                             {article.title}
@@ -302,33 +289,16 @@ const Article = () => {
 
                 </div>
 
-                <div className="flex justify-start mt-2">
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center bg-[#7EC07E] hover:bg-[#6EB06E] text-[#0D2B14] font-bold text-sm px-6 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer border-none"
-                  >
-                    <Save size={16} className="mr-2 stroke-[2.5]" />
-                    Simpan
-                  </button>
-                </div>
-
               </form>
             </div>
           </>
         )}
 
-        {/* TAMPILAN FORM (TAMBAH/EDIT) */}
+        {/* TAMPILAN FORM TAMBAH/EDIT*/}
         {viewMode === 'form' && (
           <div className="w-full flex flex-col gap-6">
             
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm flex items-center gap-4 w-full">
-              <button
-                type="button"
-                onClick={() => setViewMode('list')}
-                className="p-2.5 rounded-lg bg-[#F7F3E9] hover:bg-[#EAE4D7] text-black transition-all cursor-pointer border-none flex items-center justify-center"
-              >
-                <ArrowLeft size={20} />
-              </button>
               <h1 className="m-0 text-3xl font-bold text-black tracking-tight">
                 {editingArticleId ? 'Edit artikel' : 'Tambah artikel baru'}
               </h1>
@@ -378,7 +348,7 @@ const Article = () => {
                   />
                 </div>
 
-                {/* Field 3: JUDUL */}
+                {/* Field 3: JUDUL*/}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[12px] font-bold leading-4 tracking-[0.6px] text-[#3D4947] uppercase">
                     JUDUL
@@ -408,7 +378,7 @@ const Article = () => {
                   />
                 </div>
 
-                {/* Field 5: DESKRIPSI */}
+                {/* Field 5: DESKRIPSI*/}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[12px] font-bold leading-4 tracking-[0.6px] text-[#3D4947] uppercase">
                     DESKRIPSI
@@ -468,58 +438,48 @@ const Article = () => {
                   />
                 </div>
 
-                {/* Field 9: GAMBAR */}
+                {/* Field 9: GAMBAR*/}
                 <div className="flex flex-col items-start gap-2 w-full">
                   <label className="text-[12px] font-bold leading-4 tracking-[0.6px] text-[#3D4947] uppercase">
                     GAMBAR
                   </label>
 
-                  {articleImagePreview ? (
-                    <div className="flex items-start gap-10">
-                      <div className="w-[380px] h-[220px] rounded-lg overflow-hidden border border-gray-200 shadow-sm bg-black flex items-center justify-center">
+                  <div
+                    onClick={handleUploadClick}
+                    className="w-full bg-[#F8F4E9] border border-[#EBE3D3] rounded-2xl p-4 flex items-center gap-6 cursor-pointer shadow-xs hover:border-[#D6C2A0] transition-all min-h-[72px]"
+                  >
+                    <button
+                      type="button"
+                      className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-semibold text-xs px-5 py-2.5 rounded-full cursor-pointer border-none shadow-xs transition-all flex-shrink-0"
+                    >
+                      Choose a file
+                    </button>
+
+                    {articleImagePreview ? (
+                      <div className="h-16 w-32 rounded-xl overflow-hidden border border-gray-300 shadow-sm bg-black flex-shrink-0">
                         <img
                           src={articleImagePreview}
-                          alt="Preview Gambar"
+                          alt="Preview Gambar Artikel"
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <button
-                        type="button"
-                        onClick={handleUploadClick}
-                        className="bg-[#FFD600] hover:bg-[#e6c200] text-black font-bold text-sm px-10 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer border-none"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  ) : (
-                    <div
-                      onClick={handleUploadClick}
-                      onDrop={handleDrop}
-                      onDragOver={handleDragOver}
-                      className="w-[340px] h-48 border-2 border-dashed border-[#B0B0B0] rounded-xl flex flex-col items-center justify-center p-4 cursor-pointer hover:bg-gray-50 transition-colors bg-white relative overflow-hidden"
-                    >
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="border border-gray-300 rounded-lg px-6 py-2.5 flex items-center gap-2 bg-white shadow-2xs">
-                          <Upload size={18} className="text-black" />
-                          <span className="text-sm font-semibold text-black">Upload</span>
-                        </div>
-                        <span className="text-xs text-gray-500 italic mt-1">
-                          Click atau drop gambar
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                    ) : (
+                      <span className="text-sm text-[#A09A8C] select-none font-normal">
+                        No file choosen
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex justify-start mt-4">
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center bg-[#7EC07E] hover:bg-[#6EB06E] text-[#0D2B14] font-bold text-sm px-10 py-3 rounded-lg shadow-sm transition-all cursor-pointer border-none"
-                  >
-                    Simpan
-                  </button>
-                </div>
-
+<div className="flex justify-end mt-2">
+  <button
+    type="submit"
+    className="inline-flex items-center justify-center bg-[#7EC07E] hover:bg-[#6EB06E] text-[#0D2B14] font-bold text-sm px-6 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer border-none"
+  >
+    <Save size={16} className="mr-2 stroke-[2.5]" />
+    Simpan
+  </button>
+</div>
               </form>
             </div>
 
@@ -528,6 +488,7 @@ const Article = () => {
 
       </div>
 
+      {/*  HAPUS */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-[580px] overflow-hidden text-left animate-in fade-in zoom-in-95 duration-150">

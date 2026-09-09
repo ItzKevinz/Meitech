@@ -102,7 +102,7 @@ const TopFAQ = () => {
             </div>
           </div>
 
-          {/* JUDUL DALAM BAHASA INGGRIS (Ngikut warna & opacity dari Judul Utama) */}
+          {/* JUDUL DALAM BAHASA INGGRIS */}
           <div className="mb-4">
             <label className="mb-1.5 block text-[10px] font-bold italic text-[#555]">
               JUDUL DALAM BAHASA INGGRIS
@@ -158,7 +158,7 @@ const TopFAQ = () => {
             </div>
           </div>
 
-          {/* DESKRIPSI DALAM BAHASA INGGRIS (Ngikut warna & opacity dari Deskripsi Utama) */}
+          {/* DESKRIPSI DALAM BAHASA INGGRIS*/}
           <div className="mb-5">
             <label className="mb-1.5 block text-[10px] font-bold italic text-[#555]">
               DESKRIPSI DALAM BAHASA INGGRIS

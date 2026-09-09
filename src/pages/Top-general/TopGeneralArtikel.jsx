@@ -228,7 +228,6 @@ const TopGeneralArtikel = () => {
               Simpan
             </button>
           </div>
-
         </form>
       </section>
     </div>

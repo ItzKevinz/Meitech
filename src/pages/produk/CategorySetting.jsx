@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Save, X, ArrowLeft, Upload } from "lucide-react";
+import { Save, X,  Upload } from "lucide-react";
 
 const CategorySetting = () => {
   const [viewMode, setViewMode] = useState("list");
@@ -311,13 +311,6 @@ const CategorySetting = () => {
             
             {/* Page Header Card */}
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-sm flex items-center gap-4 w-full">
-              <button
-                type="button"
-                onClick={() => setViewMode("list")}
-                className="p-2 rounded-lg bg-[#F7F3E9] hover:bg-[#EAE4D7] text-black transition-all cursor-pointer border-none flex items-center justify-center"
-              >
-                <ArrowLeft size={18} />
-              </button>
               <h1 className="m-0 text-xl md:text-2xl font-bold text-black tracking-tight">
                 {editingId ? "Edit Kategori" : "Tambah Kategori"}
               </h1>

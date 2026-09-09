@@ -92,7 +92,7 @@ const ContactSettings = () => {
             {/* PAGE HEADER */}
             <div className="bg-white rounded-xl p-5 md:px-8 shadow-xs text-left w-full">
               <h1 className="m-0 text-2xl font-bold text-black tracking-tight">
-                Kontak-settings
+                Kontak
               </h1>
             </div>
 

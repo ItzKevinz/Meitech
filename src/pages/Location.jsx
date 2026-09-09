@@ -114,7 +114,6 @@ const Location = () => {
             />
           </div>
 
-          {/* BOTTOM TEXT */}
           <div className="mb-4">
             <label className="mb-1.5 block text-[10px] font-bold text-[#555]">
               BOTTOM TEXT
